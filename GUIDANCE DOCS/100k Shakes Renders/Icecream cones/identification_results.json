@@ -1,0 +1,44 @@
+[
+  {
+    "original": "classic-vanilla-cone.png",
+    "new": "classic-vanilla-cone_7.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_1.png",
+    "new": "classic-vanilla-cone.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_2.png",
+    "new": "classic-vanilla-cone_1.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_3.png",
+    "new": "classic-vanilla-cone_2.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_4.png",
+    "new": "classic-vanilla-cone_3.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_5.png",
+    "new": "classic-vanilla-cone_4.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  },
+  {
+    "original": "classic-vanilla-cone_6.png",
+    "new": "classic-vanilla-cone_5.png",
+    "item": "Classic Vanilla Cone",
+    "score": 30
+  }
+]

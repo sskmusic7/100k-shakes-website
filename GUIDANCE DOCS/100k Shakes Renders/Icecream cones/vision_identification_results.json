@@ -1,0 +1,44 @@
+[
+  {
+    "original": "caramel-crunch-cone.png",
+    "new": "caramel-crunch-cone_1.png",
+    "item": "Caramel Crunch Cone",
+    "vision_result": "Caramel Crunch Cone"
+  },
+  {
+    "original": "classic-vanilla-cone.png",
+    "new": "classic-vanilla-cone_2.png",
+    "item": "Classic Vanilla Cone",
+    "vision_result": "Classic Vanilla Cone"
+  },
+  {
+    "original": "classic-vanilla-cone_1.png",
+    "new": "classic-vanilla-cone.png",
+    "item": "Classic Vanilla Cone",
+    "vision_result": "Classic Vanilla Cone"
+  },
+  {
+    "original": "double-chocolate-cone.png",
+    "new": "double-chocolate-cone_1.png",
+    "item": "Double Chocolate Cone",
+    "vision_result": "Double Chocolate Cone"
+  },
+  {
+    "original": "strawberry-swirl-cone.png",
+    "new": "strawberry-swirl-cone_3.png",
+    "item": "Strawberry Swirl Cone",
+    "vision_result": "Strawberry Swirl Cone"
+  },
+  {
+    "original": "strawberry-swirl-cone_1.png",
+    "new": "strawberry-swirl-cone.png",
+    "item": "Strawberry Swirl Cone",
+    "vision_result": "Strawberry Swirl Cone"
+  },
+  {
+    "original": "strawberry-swirl-cone_2.png",
+    "new": "strawberry-swirl-cone_1.png",
+    "item": "Strawberry Swirl Cone",
+    "vision_result": "Strawberry Swirl Cone"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "original": "caramel-swirl.png",
+    "new": "caramel-swirl_4.png",
+    "item": "Caramel Swirl",
+    "vision_result": "Vegan Caramel Swirl"
+  },
+  {
+    "original": "caramel-swirl_1.png",
+    "new": "caramel-swirl.png",
+    "item": "Caramel Swirl",
+    "vision_result": "Vegan Caramel Swirl"
+  },
+  {
+    "original": "caramel-swirl_2.png",
+    "new": "caramel-swirl_1.png",
+    "item": "Caramel Swirl",
+    "vision_result": "Vegan Caramel Swirl"
+  },
+  {
+    "original": "caramel-swirl_3.png",
+    "new": "caramel-swirl_2.png",
+    "item": "Caramel Swirl",
+    "vision_result": "Vegan Caramel Swirl"
+  },
+  {
+    "original": "chocolate-fudge.png",
+    "new": "vegan-chocolate-dream_1.png",
+    "item": "Vegan Chocolate Dream",
+    "vision_result": "Vegan Chocolate Dream"
+  },
+  {
+    "original": "chocolate-fudge_1.png",
+    "new": "chocolate-fudge.png",
+    "item": "Chocolate Fudge",
+    "vision_result": "Chocolate Fudge"
+  },
+  {
+    "original": "strawberry-dream.png",
+    "new": "strawberry-dream_1.png",
+    "item": "Strawberry Dream",
+    "vision_result": "Strawberry Dream"
+  },
+  {
+    "original": "vegan-chocolate-dream.png",
+    "new": "chocolate-fudge_1.png",
+    "item": "Chocolate Fudge",
+    "vision_result": "Chocolate Fudge"
+  },
+  {
+    "original": "vegan-chocolate-dream_9.png",
+    "new": "chocolate-fudge_2.png",
+    "item": "Chocolate Fudge",
+    "vision_result": "Chocolate Fudge"
+  },
+  {
+    "original": "vegan-strawberry-bliss.png",
+    "new": "vegan-strawberry-bliss_1.png",
+    "item": "Vegan Strawberry Bliss",
+    "vision_result": "Vegan Strawberry Bliss"
+  }
+]

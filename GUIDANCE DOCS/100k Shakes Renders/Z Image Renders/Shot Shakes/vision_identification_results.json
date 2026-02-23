@@ -1,0 +1,56 @@
+[
+  {
+    "original": "amarula-bliss.webp",
+    "new": "amarula-bliss_1.webp",
+    "item": "Amarula Bliss",
+    "vision_result": "Amarula Bliss"
+  },
+  {
+    "original": "baileys-berry.webp",
+    "new": "baileys-berry_2.webp",
+    "item": "Baileys Berry",
+    "vision_result": "Baileys Berry"
+  },
+  {
+    "original": "baileys-berry_1.webp",
+    "new": "baileys-berry.webp",
+    "item": "Baileys Berry",
+    "vision_result": "Baileys Berry"
+  },
+  {
+    "original": "espresso-martini-shake.webp",
+    "new": "espresso-martini-shake_5.webp",
+    "item": "Espresso Martini Shake",
+    "vision_result": "Espresso Martini Shake"
+  },
+  {
+    "original": "espresso-martini-shake_1.webp",
+    "new": "espresso-martini-shake.webp",
+    "item": "Espresso Martini Shake",
+    "vision_result": "Espresso Martini Shake"
+  },
+  {
+    "original": "espresso-martini-shake_2.webp",
+    "new": "espresso-martini-shake_1.webp",
+    "item": "Espresso Martini Shake",
+    "vision_result": "Espresso Martini Shake"
+  },
+  {
+    "original": "espresso-martini-shake_3.webp",
+    "new": "espresso-martini-shake_2.webp",
+    "item": "Espresso Martini Shake",
+    "vision_result": "Espresso Martini Shake"
+  },
+  {
+    "original": "espresso-martini-shake_4.webp",
+    "new": "espresso-martini-shake_3.webp",
+    "item": "Espresso Martini Shake",
+    "vision_result": "Espresso Martini Shake"
+  },
+  {
+    "original": "jager-shake.webp",
+    "new": "jager-shake_1.webp",
+    "item": "J\u00e4ger Shake",
+    "vision_result": "J\u00e4ger Shake"
+  }
+]
