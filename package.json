@@ -1,0 +1,22 @@
+{
+  "name": "100k-shakes-website",
+  "version": "1.0.0",
+  "description": "100K Shakes - Premium Milkshake Brand Website",
+  "scripts": {
+    "dev": "http-server . -p 5000 -o",
+    "start": "http-server . -p 5000"
+  },
+  "keywords": [
+    "milkshakes",
+    "website",
+    "static"
+  ],
+  "author": "100K Shakes",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+
+
+

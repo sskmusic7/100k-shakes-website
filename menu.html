@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our premium menu of StraightShakes, ShotShakes, and Ice Cream Cones. Customize your perfect indulgence at 100K Shakes.">
+    <title>Menu - 100K Shakes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">100K <span class="logo-accent">Shakes</span></a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="shotshakes.html">ShotShakes</a></li>
+                <!-- <li><a href="locations.html">Locations</a></li> -->
+                <li><a href="franchise.html">Franchise</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="sustainability.html">Sustainability</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our <span class="script-font">Menu</span></h1>
+        <p>Premium ingredients, innovative flavours, endless indulgence</p>
+    </section>
+
+    <!-- Menu Filters -->
+    <section class="content-section">
+        <div class="container">
+            <div class="menu-filters">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="straightshake">StraightShakes</button>
+                <button class="filter-btn" data-filter="shotshake">ShotShakes</button>
+                <button class="filter-btn" data-filter="icecream">Ice Cream</button>
+                <button class="filter-btn" data-filter="vegan">Vegan Options</button>
+            </div>
+
+            <!-- StraightShakes Section -->
+            <div id="straightshakes" class="menu-section">
+                <h2 class="section-title">Straight<span class="script-font">Shakes</span></h2>
+                <div class="menu-grid">
+                    <div class="menu-item straightshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Oreo Delight</h3>
+                            <p>Classic chocolate cookies blended with premium vanilla ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item straightshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Strawberry Dream</h3>
+                            <p>Fresh strawberries and creamy vanilla in perfect harmony</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Fresh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item straightshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #4A4A4A 0%, #1A1A1A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Milo Magic</h3>
+                            <p>Rich chocolate malt powder meets premium ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Signature</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item straightshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #8B4513 0%, #5D4037 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Chocolate Fudge</h3>
+                            <p>Decadent chocolate fudge swirled through vanilla ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Rich</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item straightshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #FFB74D 0%, #FF9800 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Caramel Swirl</h3>
+                            <p>Buttery caramel ribbons in creamy vanilla base</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Sweet</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item straightshake vegan">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Vegan Vanilla Delight</h3>
+                            <p>Plant-based vanilla shake with coconut cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegan">Vegan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ShotShakes Section -->
+            <div id="shotshakes" class="menu-section" style="margin-top: 4rem;">
+                <h2 class="section-title">Shot<span class="script-font">Shakes</span></h2>
+                <p class="section-subtitle">Premium alcohol-infused luxury shakes. Please enjoy responsibly.</p>
+                <div class="menu-grid">
+                    <div class="menu-item shotshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Jäger Shake</h3>
+                            <p>Jägermeister infused with rich chocolate and vanilla</p>
+                            <div class="menu-item-tags">
+                                <span class="tag alcohol">18+</span>
+                                <span class="tag">Premium</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item shotshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Amarula Bliss</h3>
+                            <p>Creamy Amarula liqueur blended with vanilla ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag alcohol">18+</span>
+                                <span class="tag">Luxury</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item shotshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Baileys Berry</h3>
+                            <p>Baileys Irish Cream with fresh strawberry swirl</p>
+                            <div class="menu-item-tags">
+                                <span class="tag alcohol">18+</span>
+                                <span class="tag">Fruity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item shotshake">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #4A4A4A 0%, #1A1A1A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Espresso Martini Shake</h3>
+                            <p>Vodka and espresso combined with chocolate ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag alcohol">18+</span>
+                                <span class="tag">Caffeinated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ice Cream Cones Section -->
+            <div id="icecream" class="menu-section" style="margin-top: 4rem;">
+                <h2 class="section-title">Ice Cream <span class="script-font">Cones</span></h2>
+                <div class="menu-grid">
+                    <div class="menu-item icecream">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Classic Vanilla Cone</h3>
+                            <p>Premium vanilla ice cream in a crispy waffle cone</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Classic</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item icecream">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #4A4A4A 0%, #1A1A1A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Double Chocolate Cone</h3>
+                            <p>Rich chocolate ice cream with chocolate chips</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Decadent</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item icecream">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Strawberry Swirl Cone</h3>
+                            <p>Vanilla ice cream with fresh strawberry ribbons</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Fresh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item icecream">
+                        <div class="menu-item-image" style="background: linear-gradient(135deg, #FFB74D 0%, #FF9800 100%);"></div>
+                        <div class="menu-item-content">
+                            <h3>Caramel Crunch Cone</h3>
+                            <p>Caramel ice cream with toffee pieces</p>
+                            <div class="menu-item-tags">
+                                <span class="tag">Crunchy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Build Your Shake CTA -->
+    <section class="content-section" style="background: var(--primary-brown); color: var(--off-white);">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--off-white);">Build Your <span class="script-font">Perfect Shake</span></h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Customize your shake with premium toppings and mix-ins</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="contact.html" class="btn btn-primary">Contact Us to Customize</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>100K Shakes</h3>
+                    <p>Redefining indulgence through premium milkshakes and innovative flavours.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="story.html">Our Story</a></li>
+                        <!-- <li><a href="locations.html">Locations</a></li> -->
+                        <li><a href="franchise.html">Franchise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="rewards.html">Rewards</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@100kshakes.com</p>
+                    <p>Phone: +27 (0) 11 123 4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 100K Shakes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

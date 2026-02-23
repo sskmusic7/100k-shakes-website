@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="100K Shakes - Indulgence Elevated. Premium milkshakes with luxury alcohol-infused options. Redefining indulgence one shake at a time.">
+    <title>100K Shakes - Indulgence Elevated</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">100K <span class="logo-accent">Shakes</span></a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="shotshakes.html">ShotShakes</a></li>
+                <!-- <li><a href="locations.html">Locations</a></li> -->
+                <li><a href="franchise.html">Franchise</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="sustainability.html">Sustainability</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Indulgence <span class="script-font">Elevated</span></h1>
+            <p class="hero-subtitle">Premium milkshakes reimagined with luxury ingredients and innovative twists</p>
+            <div class="hero-buttons">
+                <a href="menu.html" class="btn btn-primary">View Menu</a>
+                <!-- <a href="locations.html" class="btn btn-secondary">Find a Shack</a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Shakes Carousel -->
+    <section class="featured-shakes">
+        <div class="container">
+            <h2 class="section-title">Featured <span class="script-font">Shakes</span></h2>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <div class="shake-card">
+                            <div class="shake-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                            <h3>Oreo Delight</h3>
+                            <p>Classic cookie perfection in every sip</p>
+                            <span class="shake-category">StraightShake</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="shake-card">
+                            <div class="shake-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                            <h3>Strawberry Dream</h3>
+                            <p>Fresh strawberries blended to perfection</p>
+                            <span class="shake-category">StraightShake</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="shake-card">
+                            <div class="shake-image" style="background: linear-gradient(135deg, #4A4A4A 0%, #1A1A1A 100%);"></div>
+                            <h3>Milo Magic</h3>
+                            <p>Rich chocolate malt indulgence</p>
+                            <span class="shake-category">StraightShake</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="shake-card">
+                            <div class="shake-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                            <h3>Jäger Shake</h3>
+                            <p>Premium alcohol-infused luxury</p>
+                            <span class="shake-category shotshake">ShotShake</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="shake-card">
+                            <div class="shake-image" style="background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);"></div>
+                            <h3>Amarula Bliss</h3>
+                            <p>Creamy liqueur meets milkshake perfection</p>
+                            <span class="shake-category shotshake">ShotShake</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" id="prevBtn" aria-label="Previous slide">‹</button>
+                <button class="carousel-btn next" id="nextBtn" aria-label="Next slide">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories Strip -->
+    <section class="product-categories">
+        <div class="container">
+            <h2 class="section-title">Explore Our <span class="script-font">Collections</span></h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">🥤</div>
+                    <h3>StraightShakes</h3>
+                    <p>Signature flavours crafted with premium ingredients</p>
+                    <a href="menu.html#straightshakes" class="category-link">Explore →</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍸</div>
+                    <h3>ShotShakes</h3>
+                    <p>Luxury alcohol-infused shakes for the adventurous</p>
+                    <a href="shotshakes.html" class="category-link">Explore →</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍦</div>
+                    <h3>Ice Cream Cones</h3>
+                    <p>Classic indulgent treats with a premium twist</p>
+                    <a href="menu.html#icecream" class="category-link">Explore →</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🌱</div>
+                    <h3>Vegan Options</h3>
+                    <p>Plant-based delights for everyone to enjoy</p>
+                    <a href="sustainability.html#vegan" class="category-link">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Feed Section -->
+    <section class="social-feed">
+        <div class="container">
+            <h2 class="section-title">Share Your <span class="script-font">Indulgence</span></h2>
+            <p class="section-subtitle">Tag us @100KShakes and join the community</p>
+            <div class="social-grid">
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #4A4A4A 0%, #1A1A1A 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #8B4513 0%, #654321 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+                <div class="social-post">
+                    <div class="social-image" style="background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);"></div>
+                    <div class="social-overlay">
+                        <span class="social-icon">📷</span>
+                    </div>
+                </div>
+            </div>
+            <div class="social-cta">
+                <a href="https://instagram.com/100kshakes" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Follow Us on Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="section-title">Get the <span class="script-font">Scoop</span></h2>
+            <p class="section-subtitle">Subscribe to our newsletter for exclusive flavours and special offers</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>100K Shakes</h3>
+                    <p>Redefining indulgence through premium milkshakes and innovative flavours.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="story.html">Our Story</a></li>
+                        <!-- <li><a href="locations.html">Locations</a></li> -->
+                        <li><a href="franchise.html">Franchise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="rewards.html">Rewards</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@100kshakes.com</p>
+                    <p>Phone: +27 (0) 11 123 4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 100K Shakes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

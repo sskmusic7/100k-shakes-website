@@ -1,0 +1,149 @@
+{
+  "straightshakes": [
+    {
+      "id": "oreo-delight",
+      "title": "Oreo Delight",
+      "category": "StraightShake",
+      "prompt": "A luxurious milkshake in a clear cup with black and white striped straw. Creamy cookies-and-cream colored shake with visible Oreo cookie crumbles throughout. Topped with whipped cream, crushed Oreo pieces, and a whole Oreo cookie standing upright. Dark chocolate drizzle cascading down the sides of whipped cream. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Oreo cookies", "vanilla ice cream", "milk", "whipped cream", "chocolate drizzle"],
+      "tags": ["Popular"]
+    },
+    {
+      "id": "strawberry-dream",
+      "title": "Strawberry Dream",
+      "category": "StraightShake",
+      "prompt": "A vibrant pink milkshake in a clear cup with bright pink and white striped straw. Smooth strawberry-pink colored shake. Topped with fluffy white whipped cream, fresh strawberry slices, strawberry syrup drizzle, and a whole fresh strawberry with leaves on top. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Fresh strawberries", "strawberry ice cream", "milk", "whipped cream", "strawberry syrup"],
+      "tags": ["Fresh"]
+    },
+    {
+      "id": "milo-magic",
+      "title": "Milo Magic",
+      "category": "StraightShake",
+      "prompt": "A rich chocolate-brown milkshake in a clear cup with brown and cream striped straw. Deep malty chocolate colored shake with visible Milo powder texture. Topped with whipped cream, generous dusting of Milo powder, chocolate sauce drizzle, and chocolate shavings. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Milo powder", "chocolate ice cream", "milk", "whipped cream", "chocolate sauce"],
+      "tags": ["Signature"]
+    },
+    {
+      "id": "chocolate-fudge",
+      "title": "Chocolate Fudge",
+      "category": "StraightShake",
+      "prompt": "A decadent dark chocolate milkshake in a clear cup with brown and gold striped straw. Ultra-rich dark brown colored shake with thick, velvety texture. Topped with whipped cream, hot fudge sauce dripping down sides, chocolate chunks, and chocolate curls. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Dark chocolate", "chocolate ice cream", "fudge sauce", "milk", "whipped cream", "chocolate chunks"],
+      "tags": ["Rich"]
+    },
+    {
+      "id": "caramel-swirl",
+      "title": "Caramel Swirl",
+      "category": "StraightShake",
+      "prompt": "A golden-brown milkshake in a clear cup with caramel and cream striped straw. Creamy caramel-colored shake with visible caramel sauce swirls inside the cup. Topped with whipped cream, caramel sauce drizzle, toffee pieces, and a wafer stick. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Caramel sauce", "vanilla ice cream", "milk", "whipped cream", "toffee pieces"],
+      "tags": ["Sweet"]
+    },
+    {
+      "id": "vegan-vanilla-delight",
+      "title": "Vegan Vanilla Delight",
+      "category": "StraightShake",
+      "prompt": "A clean white milkshake in a clear cup with white and gold striped straw. Smooth vanilla-cream colored shake. Topped with coconut whipped cream, vanilla bean specks visible, edible flowers, and a vanilla pod garnish. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic. V or leaf symbol visible.",
+      "ingredients": ["Oat milk", "vegan vanilla ice cream", "coconut whipped cream", "vanilla extract", "vanilla pod"],
+      "tags": ["Vegan", "Dairy-Free"]
+    }
+  ],
+  "shotshakes": [
+    {
+      "id": "jager-shake",
+      "title": "Jäger Shake",
+      "category": "ShotShake",
+      "prompt": "A sophisticated dark amber milkshake in a clear cup with black and orange striped straw. Rich caramel-brown colored shake with luxurious texture. Topped with whipped cream, orange zest, dark chocolate shavings, and an orange slice garnish. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Jägermeister liqueur", "caramel ice cream", "milk", "whipped cream", "orange zest", "dark chocolate"],
+      "tags": ["18+", "Premium"]
+    },
+    {
+      "id": "amarula-bliss",
+      "title": "Amarula Bliss",
+      "category": "ShotShake",
+      "prompt": "A creamy beige-brown milkshake in a clear cup with brown and cream striped straw. Smooth caramel-coffee colored shake with silky appearance. Topped with whipped cream, caramel drizzle, crushed nuts, and a cinnamon stick. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Amarula cream liqueur", "vanilla ice cream", "milk", "whipped cream", "caramel sauce", "crushed nuts"],
+      "tags": ["18+", "Luxury"]
+    },
+    {
+      "id": "baileys-berry",
+      "title": "Baileys Berry",
+      "category": "ShotShake",
+      "prompt": "A light pink-cream milkshake in a clear cup with pink and white striped straw. Creamy strawberry-cream colored shake with smooth texture. Topped with whipped cream, fresh berries (strawberries, raspberries), chocolate shavings, and a chocolate-dipped strawberry. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Baileys Irish Cream", "strawberry ice cream", "fresh berries", "milk", "whipped cream", "chocolate"],
+      "tags": ["18+", "Fruity"]
+    },
+    {
+      "id": "espresso-martini-shake",
+      "title": "Espresso Martini Shake",
+      "category": "ShotShake",
+      "prompt": "A rich coffee-brown milkshake in a clear cup with black and white striped straw. Deep coffee-colored shake with creamy foam on top. Topped with whipped cream, espresso beans, cocoa powder dusting, chocolate-covered coffee beans, and a biscotti stick. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Espresso coffee", "vodka", "coffee liqueur", "vanilla ice cream", "milk", "whipped cream", "cocoa powder"],
+      "tags": ["18+", "Caffeinated"]
+    }
+  ],
+  "icecream": [
+    {
+      "id": "classic-vanilla-cone",
+      "title": "Classic Vanilla Cone",
+      "category": "Ice Cream",
+      "prompt": "A traditional wafer cone filled with smooth white vanilla ice cream. Two generous scoops with clean, creamy appearance. Simple and elegant presentation with vanilla bean specks visible in the ice cream. Plain background for menu. Realistic lighting.",
+      "ingredients": ["Vanilla ice cream", "wafer cone", "vanilla beans"],
+      "tags": ["Classic"]
+    },
+    {
+      "id": "double-chocolate-cone",
+      "title": "Double Chocolate Cone",
+      "category": "Ice Cream",
+      "prompt": "A wafer cone filled with rich dark chocolate ice cream. Two large scoops of deep brown chocolate ice cream. Topped with chocolate chips, chocolate sauce drizzle, and a chocolate flake stick inserted in the top scoop. Plain background for menu. Realistic lighting.",
+      "ingredients": ["Dark chocolate ice cream", "wafer cone", "chocolate chips", "chocolate sauce", "chocolate flake"],
+      "tags": ["Decadent"]
+    },
+    {
+      "id": "strawberry-swirl-cone",
+      "title": "Strawberry Swirl Cone",
+      "category": "Ice Cream",
+      "prompt": "A wafer cone filled with pink strawberry ice cream with visible strawberry ripples. Two scoops showing natural strawberry pieces throughout. Topped with fresh strawberry slice and strawberry syrup drizzle. Plain background for menu. Realistic lighting.",
+      "ingredients": ["Strawberry ice cream", "fresh strawberries", "wafer cone", "strawberry syrup"],
+      "tags": ["Fresh"]
+    },
+    {
+      "id": "caramel-crunch-cone",
+      "title": "Caramel Crunch Cone",
+      "category": "Ice Cream",
+      "prompt": "A wafer cone filled with golden caramel ice cream. Two scoops of creamy caramel-colored ice cream. Topped with caramel sauce drizzle, crushed honeycomb pieces, and toffee chunks scattered on top. Plain background for menu. Realistic lighting.",
+      "ingredients": ["Caramel ice cream", "wafer cone", "caramel sauce", "honeycomb pieces", "toffee chunks"],
+      "tags": ["Crunchy"]
+    }
+  ],
+  "vegan": [
+    {
+      "id": "vegan-chocolate-dream",
+      "title": "Vegan Chocolate Dream",
+      "category": "Vegan",
+      "prompt": "A rich dark chocolate milkshake in a clear cup with purple and brown striped straw. Deep chocolate-colored shake made with plant-based ingredients. Topped with coconut whipped cream, vegan chocolate chips, cocoa powder dusting, and a vegan cookie garnish. V or leaf symbol visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Almond milk", "vegan chocolate ice cream", "coconut whipped cream", "vegan chocolate chips", "cocoa powder"],
+      "tags": ["Vegan", "Dairy-Free"]
+    },
+    {
+      "id": "vegan-strawberry-bliss",
+      "title": "Vegan Strawberry Bliss",
+      "category": "Vegan",
+      "prompt": "A bright pink milkshake in a clear cup with pink and green striped straw. Vibrant strawberry-colored shake made with plant-based ingredients. Topped with coconut whipped cream, fresh strawberry slices, chia seeds, and mint leaves. V or leaf symbol visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Oat milk", "vegan strawberry ice cream", "fresh strawberries", "coconut whipped cream", "chia seeds"],
+      "tags": ["Vegan", "Dairy-Free"]
+    },
+    {
+      "id": "vegan-caramel-swirl",
+      "title": "Vegan Caramel Swirl",
+      "category": "Vegan",
+      "prompt": "A golden-brown milkshake in a clear cup with caramel and green striped straw. Creamy caramel-colored shake with visible caramel swirls made with plant-based ingredients. Topped with coconut whipped cream, vegan caramel sauce, crushed almonds, and a date garnish. V or leaf symbol visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Cashew milk", "vegan caramel ice cream", "coconut whipped cream", "vegan caramel sauce", "almonds", "dates"],
+      "tags": ["Vegan", "Dairy-Free"]
+    }
+  ]
+}
+
+
+

@@ -1,0 +1,87 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Image generation outputs
+images/generated/
+images/processed/
+
+# Original large images (exclude)
+"Brand Assets/100k Shakes gemini renders/*.png"
+"Brand Assets/100k Shakes gemini renders/*.jpg"
+
+# Compressed images (include these)
+!images/compressed/
+!images/compressed/*.jpg
+!images/compressed/*.png
+
+# Environment variables
+.env
+.env.local
+*.key
+*.pem
+
+# API keys and secrets
+*_api_key.txt
+secrets.json
+config.json
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Cache
+.cache/
+*.cache
+
+# Model weights (too large for git)
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+models/
+checkpoints/
+
+# Keep these directories but ignore contents
+!images/.gitkeep
+!Brand Assets/.gitkeep

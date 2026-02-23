@@ -1,0 +1,18 @@
+# Requirements for 100K Shakes Image Generator
+
+# For Z-Image (Hugging Face)
+torch>=2.0.0
+torchvision>=0.15.0
+pillow>=9.0.0
+diffusers>=0.30.0
+# Install diffusers from source for Z-Image support:
+# pip install git+https://github.com/huggingface/diffusers
+
+# For Google Gemini
+google-generativeai>=0.3.0
+
+# General utilities
+numpy>=1.24.0
+
+
+
