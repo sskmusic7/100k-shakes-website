@@ -31,6 +31,8 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    background-color: var(--primary-brown);
+    transition: background-color 0.06s linear;
 }
 
 .script-font {
@@ -812,15 +814,7 @@ section {
 }
 
 .scroll-blend-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    background: var(--primary-brown);
-    transition: background 0.05s linear;
-    pointer-events: none;
+    display: none; /* Background is now driven directly on body */
 }
 
 .scroll-blend-sections {

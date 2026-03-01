@@ -221,9 +221,8 @@ navLinksAll.forEach(link => {
 
 const scrollBlendContainer = document.getElementById('scrollBlendContainer');
 const scrollBlendSections = document.getElementById('scrollBlendSections');
-const scrollBlendBg = document.getElementById('scrollBlendBg');
 
-if (scrollBlendContainer && scrollBlendSections && scrollBlendBg) {
+if (scrollBlendContainer && scrollBlendSections) {
     // Featured shakes data with color-matched backgrounds
     const featuredShakes = [
         {
@@ -329,8 +328,8 @@ if (scrollBlendContainer && scrollBlendSections && scrollBlendBg) {
         const relativeScroll = scrollTop - sectionStart;
         
         if (relativeScroll < 0) {
-            // Still in hero section
-            scrollBlendBg.style.background = heroBg;
+            // Still in hero section — keep body at base brown
+            document.body.style.backgroundColor = heroBg;
             return;
         }
 
@@ -339,10 +338,10 @@ if (scrollBlendContainer && scrollBlendSections && scrollBlendBg) {
         const sectionIndex = Math.min(Math.floor(rawProgress), totalSections - 1);
         const sectionProgress = rawProgress - sectionIndex;
 
-        // Lerp background color
+        // Lerp background color directly on the body
         if (sectionIndex < totalSections) {
             const bgColor = lerpColor(bgColors[sectionIndex], bgColors[sectionIndex + 1], sectionProgress);
-            scrollBlendBg.style.background = bgColor;
+            document.body.style.backgroundColor = bgColor;
         }
     }
 
