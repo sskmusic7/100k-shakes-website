@@ -313,6 +313,58 @@ if (scrollBlendContainer && scrollBlendSections) {
         );
     }
 
+    // Floating ingredient images per shake
+    const floatingImages = {
+        "Oreo Delight": [
+            { src: "images/floating/oreo-delight-float-1.webp", top: "75%", left: "3%", width: "100px" },
+            { src: "images/floating/oreo-delight-float-2.webp", top: "15%", right: "5%", width: "80px" },
+            { src: "images/floating/oreo-delight-float-3.webp", top: "25%", left: "8%", width: "120px" },
+            { src: "images/floating/oreo-delight-float-1.webp", bottom: "20%", right: "10%", width: "70px" },
+            { src: "images/floating/oreo-delight-float-2.webp", top: "50%", left: "2%", width: "60px" },
+            { src: "images/floating/oreo-delight-float-3.webp", bottom: "10%", left: "15%", width: "90px" }
+        ],
+        "Strawberry Dream": [
+            { src: "images/floating/strawberry-dream-float-1.webp", top: "10%", left: "5%", width: "110px" },
+            { src: "images/floating/strawberry-dream-float-2.webp", top: "30%", right: "3%", width: "90px" },
+            { src: "images/floating/strawberry-dream-float-3.webp", bottom: "15%", left: "8%", width: "100px" },
+            { src: "images/floating/strawberry-dream-float-1.webp", bottom: "30%", right: "8%", width: "80px" },
+            { src: "images/floating/strawberry-dream-float-2.webp", top: "55%", left: "2%", width: "70px" },
+            { src: "images/floating/strawberry-dream-float-3.webp", top: "5%", right: "12%", width: "85px" }
+        ],
+        "Milo Magic": [
+            { src: "images/floating/milo-magic-float-1.webp", top: "12%", left: "4%", width: "120px" },
+            { src: "images/floating/milo-magic-float-2.webp", top: "20%", right: "6%", width: "75px" },
+            { src: "images/floating/milo-magic-float-3.webp", bottom: "18%", right: "4%", width: "85px" },
+            { src: "images/floating/milo-magic-float-1.webp", bottom: "25%", left: "10%", width: "95px" },
+            { src: "images/floating/milo-magic-float-2.webp", top: "45%", right: "15%", width: "65px" },
+            { src: "images/floating/milo-magic-float-3.webp", top: "60%", left: "3%", width: "70px" }
+        ],
+        "Jäger Shake": [
+            { src: "images/floating/jager-shake-float-1.webp", top: "8%", right: "5%", width: "100px" },
+            { src: "images/floating/jager-shake-float-2.webp", top: "35%", left: "4%", width: "90px" },
+            { src: "images/floating/jager-shake-float-3.webp", bottom: "12%", right: "8%", width: "80px" },
+            { src: "images/floating/jager-shake-float-1.webp", bottom: "30%", left: "6%", width: "75px" },
+            { src: "images/floating/jager-shake-float-2.webp", top: "55%", right: "3%", width: "70px" },
+            { src: "images/floating/jager-shake-float-3.webp", top: "15%", left: "12%", width: "85px" }
+        ],
+        "Amarula Bliss": [
+            { src: "images/floating/amarula-bliss-float-1.webp", top: "10%", left: "6%", width: "110px" },
+            { src: "images/floating/amarula-bliss-float-2.webp", top: "25%", right: "4%", width: "85px" },
+            { src: "images/floating/amarula-bliss-float-3.webp", bottom: "15%", left: "3%", width: "95px" },
+            { src: "images/floating/amarula-bliss-float-1.webp", bottom: "25%", right: "10%", width: "70px" },
+            { src: "images/floating/amarula-bliss-float-2.webp", top: "50%", left: "2%", width: "60px" },
+            { src: "images/floating/amarula-bliss-float-3.webp", top: "8%", right: "15%", width: "80px" }
+        ],
+        "Strawberry Kiss": [
+            { src: "images/floating/strawberry-kiss-float-1.webp", top: "12%", right: "6%", width: "90px" },
+            { src: "images/floating/strawberry-kiss-float-2.webp", top: "30%", left: "5%", width: "100px" },
+            { src: "images/floating/strawberry-kiss-float-3.webp", bottom: "18%", right: "4%", width: "80px" },
+            { src: "images/floating/strawberry-kiss-float-1.webp", bottom: "30%", left: "8%", width: "75px" },
+            { src: "images/floating/strawberry-kiss-float-2.webp", top: "55%", right: "12%", width: "65px" },
+            { src: "images/floating/strawberry-kiss-float-3.webp", top: "5%", left: "15%", width: "85px" }
+        ]
+    };
+
     // Generate sections
     featuredShakes.forEach((shake, i) => {
         const section = document.createElement('div');
@@ -320,7 +372,21 @@ if (scrollBlendContainer && scrollBlendSections) {
         section.dataset.index = i;
         section.id = `shake-${i}`;
 
+        // Build floating elements HTML
+        const floats = floatingImages[shake.name] || [];
+        let floatingHTML = '<div class="floating-elements">';
+        floats.forEach((f) => {
+            let style = `width: ${f.width};`;
+            if (f.top) style += ` top: ${f.top};`;
+            if (f.bottom) style += ` bottom: ${f.bottom};`;
+            if (f.left) style += ` left: ${f.left};`;
+            if (f.right) style += ` right: ${f.right};`;
+            floatingHTML += `<img src="${f.src}" class="floating-ingredient" style="${style}" alt="" loading="lazy" />`;
+        });
+        floatingHTML += '</div>';
+
         section.innerHTML = `
+            ${floatingHTML}
             <div class="scroll-blend-content">
                 <div class="scroll-blend-visual">
                     <img src="${shake.image}" alt="${shake.name}" class="scroll-blend-image" />
