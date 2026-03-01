@@ -215,5 +215,177 @@ navLinksAll.forEach(link => {
     }
 });
 
+// ════════════════════════════════════════════════
+//  SCROLL-BLEND SHAKE SECTIONS
+// ════════════════════════════════════════════════
+
+const scrollBlendContainer = document.getElementById('scrollBlendContainer');
+const scrollBlendSections = document.getElementById('scrollBlendSections');
+const scrollBlendBg = document.getElementById('scrollBlendBg');
+
+if (scrollBlendContainer && scrollBlendSections && scrollBlendBg) {
+    // Featured shakes data with color-matched backgrounds
+    const featuredShakes = [
+        {
+            name: "Oreo Delight",
+            tag: "Popular",
+            image: "images/oreo-delight-nobg.png",
+            desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
+            bg: "#2C1810", // Deep rich chocolate
+            category: "StraightShake"
+        },
+        {
+            name: "Strawberry Dream",
+            tag: "Fresh",
+            image: "images/strawberry-dream-nobg.png",
+            desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
+            bg: "#C0253A", // Deep strawberry red
+            category: "StraightShake"
+        },
+        {
+            name: "Milo Magic",
+            tag: "Signature",
+            image: "images/milo-magic-nobg.png",
+            desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
+            bg: "#4A2C0A", // Dark malty brown
+            category: "StraightShake"
+        },
+        {
+            name: "Jäger Shake",
+            tag: "Premium · 18+",
+            image: "images/jager-shake-nobg.png",
+            desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
+            bg: "#1A3A1A", // Deep forest green (Jäger brand)
+            category: "ShotShake"
+        },
+        {
+            name: "Amarula Bliss",
+            tag: "Luxury · 18+",
+            image: "images/amarula-bliss-nobg.png",
+            desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
+            bg: "#8B5E2A", // Warm amber gold
+            category: "ShotShake"
+        }
+    ];
+
+    // Color interpolation utilities
+    function hexToRgb(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return [r, g, b];
+    }
+
+    function rgbToHex(r, g, b) {
+        return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+    }
+
+    function lerpColor(colorA, colorB, t) {
+        const a = hexToRgb(colorA);
+        const b = hexToRgb(colorB);
+        return rgbToHex(
+            a[0] + (b[0] - a[0]) * t,
+            a[1] + (b[1] - a[1]) * t,
+            a[2] + (b[2] - a[2]) * t
+        );
+    }
+
+    // Generate sections
+    featuredShakes.forEach((shake, i) => {
+        const section = document.createElement('div');
+        section.className = `scroll-blend-section${i % 2 === 1 ? ' flip' : ''}`;
+        section.dataset.index = i;
+        section.id = `shake-${i}`;
+
+        section.innerHTML = `
+            <div class="scroll-blend-content">
+                <div class="scroll-blend-visual">
+                    <img src="${shake.image}" alt="${shake.name}" class="scroll-blend-image" />
+                </div>
+                <div class="scroll-blend-info">
+                    <span class="scroll-blend-tag">${shake.tag}</span>
+                    <h2 class="scroll-blend-name">${shake.name}</h2>
+                    <p class="scroll-blend-desc">${shake.desc}</p>
+                    <a href="menu.html" class="scroll-blend-cta">View Menu</a>
+                </div>
+            </div>
+        `;
+
+        scrollBlendSections.appendChild(section);
+    });
+
+    // Color blending on scroll
+    const heroBg = '#3D2817'; // Match hero section brown
+    const bgColors = [heroBg, ...featuredShakes.map(s => s.bg), featuredShakes[featuredShakes.length - 1].bg];
+    const totalSections = featuredShakes.length;
+
+    function onScroll() {
+        const heroHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset;
+        const heroEnd = heroHeight;
+        
+        // Calculate which section we're in (0 = hero, 1+ = shake sections)
+        const sectionStart = heroEnd;
+        const relativeScroll = scrollTop - sectionStart;
+        
+        if (relativeScroll < 0) {
+            // Still in hero section
+            scrollBlendBg.style.background = heroBg;
+            return;
+        }
+
+        const sectionHeight = window.innerHeight;
+        const rawProgress = relativeScroll / sectionHeight;
+        const sectionIndex = Math.min(Math.floor(rawProgress), totalSections - 1);
+        const sectionProgress = rawProgress - sectionIndex;
+
+        // Lerp background color
+        if (sectionIndex < totalSections) {
+            const bgColor = lerpColor(bgColors[sectionIndex], bgColors[sectionIndex + 1], sectionProgress);
+            scrollBlendBg.style.background = bgColor;
+        }
+    }
+
+    // Throttle via rAF
+    let ticking = false;
+    function requestScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                onScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', requestScroll, { passive: true });
+    window.addEventListener('touchmove', requestScroll, { passive: true });
+
+    // Intersection Observer for entrance animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -20% 0px',
+        threshold: 0.3,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all shake sections
+    document.querySelectorAll('.scroll-blend-section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // Initial color set
+    onScroll();
+}
+
 
 
