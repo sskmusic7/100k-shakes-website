@@ -216,11 +216,27 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
+//  HERO TITLE FADE-OUT ON SCROLL
+// ════════════════════════════════════════════════
+
+const heroTitleOverlay = document.getElementById('heroTitleOverlay');
+if (heroTitleOverlay) {
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        const fadeStart = window.innerHeight * 0.15; // start fading at 15% scroll
+        const fadeEnd = window.innerHeight * 0.7;    // fully faded by 70%
+        const progress = Math.min(Math.max((scrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
+        heroTitleOverlay.style.opacity = 1 - progress;
+    }, { passive: true });
+}
+
+// ════════════════════════════════════════════════
 //  SCROLL-BLEND SHAKE SECTIONS
 // ════════════════════════════════════════════════
 
 const scrollBlendContainer = document.getElementById('scrollBlendContainer');
 const scrollBlendSections = document.getElementById('scrollBlendSections');
+const mainContentCurtain = document.getElementById('mainContentCurtain');
 
 if (scrollBlendContainer && scrollBlendSections) {
     // Featured shakes data — backgrounds chosen by vision analysis for maximum contrast/pop
@@ -321,23 +337,27 @@ if (scrollBlendContainer && scrollBlendSections) {
         scrollBlendSections.appendChild(section);
     });
 
-    // Color blending on scroll
-    const heroBg = '#3D2817'; // Match hero section brown
-    const bgColors = [heroBg, ...featuredShakes.map(s => s.bg), featuredShakes[featuredShakes.length - 1].bg];
+    // Color blending on scroll — targets the curtain, not body
+    const firstBg = featuredShakes[0].bg;
+    const bgColors = [firstBg, ...featuredShakes.map(s => s.bg), featuredShakes[featuredShakes.length - 1].bg];
     const totalSections = featuredShakes.length;
 
+    // Set initial curtain background
+    if (mainContentCurtain) {
+        mainContentCurtain.style.backgroundColor = firstBg;
+    }
+
     function onScroll() {
-        const heroHeight = window.innerHeight;
+        if (!mainContentCurtain) return;
+
+        // Use the curtain's actual position in the document
+        const curtainTop = mainContentCurtain.offsetTop;
         const scrollTop = window.pageYOffset;
-        const heroEnd = heroHeight;
-        
-        // Calculate which section we're in (0 = hero, 1+ = shake sections)
-        const sectionStart = heroEnd;
-        const relativeScroll = scrollTop - sectionStart;
+        const relativeScroll = scrollTop - curtainTop;
         
         if (relativeScroll < 0) {
-            // Still in hero section — keep body at base brown
-            document.body.style.backgroundColor = heroBg;
+            // Haven't reached the curtain yet — keep first bg
+            mainContentCurtain.style.backgroundColor = firstBg;
             return;
         }
 
@@ -346,10 +366,10 @@ if (scrollBlendContainer && scrollBlendSections) {
         const sectionIndex = Math.min(Math.floor(rawProgress), totalSections - 1);
         const sectionProgress = rawProgress - sectionIndex;
 
-        // Lerp background color directly on the body
+        // Lerp background color on the curtain
         if (sectionIndex < totalSections) {
             const bgColor = lerpColor(bgColors[sectionIndex], bgColors[sectionIndex + 1], sectionProgress);
-            document.body.style.backgroundColor = bgColor;
+            mainContentCurtain.style.backgroundColor = bgColor;
         }
     }
 

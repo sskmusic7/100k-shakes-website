@@ -31,8 +31,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
-    background-color: var(--primary-brown);
-    transition: background-color 0.06s linear;
+    background-color: var(--deep-brown);
 }
 
 .script-font {
@@ -124,42 +123,60 @@ body {
 }
 
 /* ============================================
-   HERO SECTION
+   HERO — BEHIND-LAYER TECHNIQUE
+   Fixed image + title; content slides over like a curtain
    ============================================ */
 
-.hero {
-    position: relative;
+/* ── Fixed image layer (always behind everything) ── */
+.hero-image-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100vh;
-    min-height: 600px;
-    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--deep-brown) 100%);
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-backdrop-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(42, 26, 14, 0.25) 0%,
+        rgba(42, 26, 14, 0.45) 40%,
+        rgba(42, 26, 14, 0.75) 100%
+    );
+}
+
+/* ── Fixed title overlay (stays until content covers it) ── */
+.hero-title-overlay {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--off-white);
-    margin-top: 70px;
-    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.1s linear;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(201,42,42,0.1)"/></svg>');
-    background-size: cover;
-    opacity: 0.3;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(201, 42, 42, 0.1) 0%, rgba(61, 40, 23, 0.8) 100%);
+.hero-title-overlay .hero-content {
+    pointer-events: auto;
 }
 
 .hero-content {
@@ -174,6 +191,7 @@ body {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .hero-title .script-font {
@@ -187,6 +205,7 @@ body {
     margin-bottom: 2.5rem;
     font-weight: 300;
     opacity: 0.95;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
 .hero-buttons {
@@ -194,6 +213,52 @@ body {
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Scroll-down hint */
+.hero-scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.hero-scroll-hint span {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hero-scroll-arrow {
+    width: 1px;
+    height: 50px;
+    background: var(--off-white);
+    opacity: 0.6;
+    animation: hero-arrow-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-arrow-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(0.5); opacity: 0.2; }
+}
+
+/* ── Scroll spacer (invisible, keeps hero visible while scrolling) ── */
+.hero-scroll-spacer {
+    position: relative;
+    height: calc(100vh + 70px); /* hero height + navbar */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── Content curtain (slides OVER the hero) ── */
+.main-content-curtain {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 -60px 100px rgba(0, 0, 0, 0.8);
 }
 
 /* ============================================
@@ -1018,15 +1083,20 @@ section {
     }
 
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .hero-title .script-font {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
     }
 
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .hero-scroll-spacer {
+        height: calc(100vh + 60px);
     }
 
     .section-title {
@@ -1082,11 +1152,11 @@ section {
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .hero-title .script-font {
-        font-size: 3rem;
+        font-size: 2.6rem;
     }
 
     .hero-buttons {
