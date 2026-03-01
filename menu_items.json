@@ -81,6 +81,14 @@
       "prompt": "A rich coffee-brown milkshake in a clear cup with black and white striped straw. Deep coffee-colored shake with creamy foam on top. Topped with whipped cream, espresso beans, cocoa powder dusting, chocolate-covered coffee beans, and a biscotti stick. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
       "ingredients": ["Espresso coffee", "vodka", "coffee liqueur", "vanilla ice cream", "milk", "whipped cream", "cocoa powder"],
       "tags": ["18+", "Caffeinated"]
+    },
+    {
+      "id": "strawberry-kiss",
+      "title": "Strawberry Kiss",
+      "category": "ShotShake",
+      "prompt": "A vibrant pink milkshake in a clear cup with pink and white striped straw. Creamy strawberry-pink colored shake infused with strawberry liqueur. Topped with whipped cream, white chocolate sprinkles generously scattered on top, and fresh strawberry garnish. Small 21+ badge visible. Plain background for menu. Realistic lighting. Make sure the sticker on the cup looks realistic.",
+      "ingredients": ["Strawberry liqueur", "strawberry ice cream", "milk", "whipped cream", "white chocolate sprinkles", "fresh strawberries"],
+      "tags": ["18+", "Sweet"]
     }
   ],
   "icecream": [

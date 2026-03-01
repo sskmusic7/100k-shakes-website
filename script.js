@@ -228,7 +228,7 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Oreo Delight",
             tag: "Popular",
-            image: "images/oreo-delight-nobg.png",
+            image: "images/oreo-delight-nobg.webp",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
             bg: "#2C1810", // Deep rich chocolate
             category: "StraightShake"
@@ -236,7 +236,7 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Strawberry Dream",
             tag: "Fresh",
-            image: "images/strawberry-dream-nobg.png",
+            image: "images/strawberry-dream-nobg.webp",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
             bg: "#C0253A", // Deep strawberry red
             category: "StraightShake"
@@ -244,7 +244,7 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Milo Magic",
             tag: "Signature",
-            image: "images/milo-magic-nobg.png",
+            image: "images/milo-magic-nobg.webp",
             desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
             bg: "#4A2C0A", // Dark malty brown
             category: "StraightShake"
@@ -252,7 +252,7 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Jäger Shake",
             tag: "Premium · 18+",
-            image: "images/jager-shake-nobg.png",
+            image: "images/jager-shake-nobg.webp",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
             bg: "#1A3A1A", // Deep forest green (Jäger brand)
             category: "ShotShake"
@@ -260,9 +260,17 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Amarula Bliss",
             tag: "Luxury · 18+",
-            image: "images/amarula-bliss-nobg.png",
+            image: "images/amarula-bliss-nobg.webp",
             desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
             bg: "#8B5E2A", // Warm amber gold
+            category: "ShotShake"
+        },
+        {
+            name: "Strawberry Kiss",
+            tag: "Sweet · 18+",
+            image: "images/strawberry-kiss-nobg.webp",
+            desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
+            bg: "#D81B60", // Vibrant pink/magenta
             category: "ShotShake"
         }
     ];

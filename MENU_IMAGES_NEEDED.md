@@ -34,7 +34,7 @@ This document lists all menu items that require product images. Each item needs 
    - Tag: Vegan, Dairy-Free
    - Image: `images/vegan-vanilla-delight.jpg`
 
-## 🍸 ShotShakes (4 items)
+## 🍸 ShotShakes (5 items)
 
 7. **Jäger Shake**
    - Description: Jägermeister infused with rich chocolate and vanilla
@@ -55,6 +55,11 @@ This document lists all menu items that require product images. Each item needs 
     - Description: Vodka and espresso combined with chocolate ice cream
     - Tag: 18+, Caffeinated
     - Image: `images/espresso-martini-shake.jpg`
+
+11. **Strawberry Kiss**
+    - Description: Strawberry liqueur infused shake with white chocolate sprinkles
+    - Tag: 18+, Sweet
+    - Image: `images/strawberry-kiss.jpg`
 
 ## 🍦 Ice Cream Cones (4 items)
 
@@ -163,9 +168,9 @@ This document lists all menu items that require product images. Each item needs 
 
 ## 📊 Summary
 
-**Total Menu Items Needing Images: 18**
+**Total Menu Items Needing Images: 19**
 - 6 StraightShakes
-- 4 ShotShakes
+- 5 ShotShakes
 - 4 Ice Cream Cones
 - 4 Vegan Options (1 duplicate, so 3 unique additional)
 
