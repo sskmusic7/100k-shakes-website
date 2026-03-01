@@ -223,14 +223,14 @@ const scrollBlendContainer = document.getElementById('scrollBlendContainer');
 const scrollBlendSections = document.getElementById('scrollBlendSections');
 
 if (scrollBlendContainer && scrollBlendSections) {
-    // Featured shakes data with color-matched backgrounds
+    // Featured shakes data — backgrounds chosen by vision analysis for maximum contrast/pop
     const featuredShakes = [
         {
             name: "Oreo Delight",
             tag: "Popular",
             image: "images/oreo-delight-nobg.webp",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
-            bg: "#2C1810", // Deep rich chocolate
+            bg: "#1A0533", // Deep indigo — grey/white shake pops against purple
             category: "StraightShake"
         },
         {
@@ -238,7 +238,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
-            bg: "#C0253A", // Deep strawberry red
+            bg: "#0B3D2E", // Rich emerald — pink/red pops against green (complementary)
             category: "StraightShake"
         },
         {
@@ -246,7 +246,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Signature",
             image: "images/milo-magic-nobg.webp",
             desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
-            bg: "#4A2C0A", // Dark malty brown
+            bg: "#0F1A2E", // Deep navy — warm brown pops against cool blue
             category: "StraightShake"
         },
         {
@@ -254,7 +254,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Premium · 18+",
             image: "images/jager-shake-nobg.webp",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
-            bg: "#1A3A1A", // Deep forest green (Jäger brand)
+            bg: "#2D0A0A", // Deep burgundy/oxblood — earthy shake contrasts rich red
             category: "ShotShake"
         },
         {
@@ -262,7 +262,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Luxury · 18+",
             image: "images/amarula-bliss-nobg.webp",
             desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
-            bg: "#8B5E2A", // Warm amber gold
+            bg: "#2A1040", // Royal purple — warm beige/gold pops against plum
             category: "ShotShake"
         },
         {
@@ -270,7 +270,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
-            bg: "#D81B60", // Vibrant pink/magenta
+            bg: "#0A1A30", // Midnight blue — bright pink pops against deep blue
             category: "ShotShake"
         }
     ];
