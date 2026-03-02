@@ -1,5 +1,139 @@
 // 100K SHAKES - MAIN JAVASCRIPT
 
+// ════════════════════════════════════════════════
+//  LOADING SCREEN (0-100% progress)
+// ════════════════════════════════════════════════
+
+const loadingScreen = document.getElementById('loadingScreen');
+const loadingCounter = loadingScreen ? loadingScreen.querySelector('.loading-counter') : null;
+const topBar = loadingScreen ? loadingScreen.querySelector('.top-bar') : null;
+const downBar = loadingScreen ? loadingScreen.querySelector('.down-bar') : null;
+const progressLine = loadingScreen ? loadingScreen.querySelector('.progress-line') : null;
+
+if (loadingScreen) {
+    // Prevent scrolling during load
+    document.body.classList.add('loading');
+    
+    let percentage = 0;
+    let resourcesLoaded = 0;
+    let totalResources = 0;
+    
+    // Count all resources that need to load
+    const images = document.querySelectorAll('img');
+    const videos = document.querySelectorAll('video');
+    const heroVideo = document.getElementById('heroVideo');
+    
+    // Count resources
+    totalResources = images.length + videos.length + 1; // +1 for fonts
+    
+    // Track image loading
+    let imagesLoaded = 0;
+    images.forEach(img => {
+        if (img.complete) {
+            imagesLoaded++;
+            updateProgress();
+        } else {
+            img.addEventListener('load', () => {
+                imagesLoaded++;
+                updateProgress();
+            });
+            img.addEventListener('error', () => {
+                imagesLoaded++;
+                updateProgress();
+            });
+        }
+    });
+    
+    // Track video loading (especially hero video)
+    let videosLoaded = 0;
+    videos.forEach(video => {
+        if (video.readyState >= 2) { // HAVE_CURRENT_DATA
+            videosLoaded++;
+            updateProgress();
+        } else {
+            video.addEventListener('loadeddata', () => {
+                videosLoaded++;
+                updateProgress();
+            });
+            video.addEventListener('error', () => {
+                videosLoaded++;
+                updateProgress();
+            });
+        }
+    });
+    
+    // Track fonts loading
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+            updateProgress();
+        });
+    } else {
+        // Fallback: assume fonts load quickly
+        setTimeout(() => updateProgress(), 500);
+    }
+    
+    // Update progress counter
+    function updateProgress() {
+        resourcesLoaded = imagesLoaded + videosLoaded;
+        const baseProgress = Math.min((resourcesLoaded / totalResources) * 90, 90); // Max 90% from resources
+        
+        // Smooth counter animation
+        const targetProgress = Math.min(baseProgress + 10, 100); // Add 10% for smooth finish
+        
+        if (percentage < targetProgress) {
+            percentage = Math.min(percentage + 1, targetProgress);
+            updateLoadingDisplay();
+        }
+        
+        // If all resources loaded and we're at 100%, finish loading
+        if (resourcesLoaded >= totalResources && percentage >= 100) {
+            finishLoading();
+        }
+    }
+    
+    // Update visual display
+    function updateLoadingDisplay() {
+        if (loadingCounter) {
+            loadingCounter.textContent = Math.round(percentage) + '%';
+        }
+        if (topBar && downBar) {
+            const barHeight = (100 - percentage) / 2;
+            topBar.style.height = barHeight + '%';
+            downBar.style.height = barHeight + '%';
+        }
+        if (progressLine) {
+            progressLine.style.transform = 'scaleX(' + (percentage / 100) + ')';
+            progressLine.style.opacity = percentage > 10 ? 1 : 0;
+        }
+    }
+    
+    // Finish loading and hide screen
+    function finishLoading() {
+        percentage = 100;
+        updateLoadingDisplay();
+        
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                document.body.classList.remove('loading');
+                // Allow scrolling now
+                window.scrollTo(0, 0);
+            }, 500);
+        }, 300);
+    }
+    
+    // Fallback: ensure loading completes even if some resources fail
+    setTimeout(() => {
+        if (percentage < 100) {
+            percentage = 100;
+            finishLoading();
+        }
+    }, 5000); // Max 5 seconds loading time
+}
+
 // Mobile Menu Toggle
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
