@@ -11,14 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <span class="bar top-bar"></span>
-        <span class="bar down-bar"></span>
-        <span class="progress-line"></span>
-        <span class="loading-counter">0%</span>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -48,8 +40,8 @@
     <!-- ── FIXED HERO IMAGE LAYER (pinned behind everything) ── -->
     <div class="hero-image-layer">
         <video id="heroVideo" class="hero-backdrop-video" muted playsinline preload="auto">
-            <source src="images/hero-video.mp4?v=3" media="(min-width: 769px)" type="video/mp4">
-            <source src="images/hero-video-mobile.mp4?v=3" type="video/mp4">
+            <source src="images/hero-video.mp4?v=2" media="(min-width: 769px)" type="video/mp4">
+            <source src="images/hero-video-mobile.mp4?v=2" type="video/mp4">
         </video>
         <div class="hero-image-overlay"></div>
     </div>
@@ -57,7 +49,9 @@
     <!-- ── FIXED HERO TITLE (stays visible until content slides over) ── -->
     <div class="hero-title-overlay" id="heroTitleOverlay">
         <div class="hero-content">
-            <h1 class="hero-title">Indulgence <span class="script-font">Elevated</span></h1>
+            <h1 class="hero-title">Indulgence <video class="elevated-word-video" autoplay muted loop playsinline>
+                <source src="images/elevated-word.webm" type="video/webm">
+            </video><span class="script-font elevated-fallback">Elevated</span></h1>
             <p class="hero-subtitle">Premium milkshakes reimagined with luxury ingredients and innovative twists</p>
         </div>
         <div class="hero-scroll-hint">
