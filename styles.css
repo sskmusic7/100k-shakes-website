@@ -138,7 +138,8 @@ body {
     overflow: hidden;
 }
 
-.hero-backdrop-img {
+.hero-backdrop-img,
+.hero-backdrop-video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -1037,14 +1038,15 @@ section {
     position: absolute;
     z-index: 0;
     opacity: 0;
-    transition: opacity 0.8s ease;
-    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+    transition: opacity 1s ease;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
     will-change: transform, opacity;
+    max-width: 35vw;
 }
 
 /* Only show when section is visible */
 .scroll-blend-section.visible .floating-ingredient {
-    opacity: 0.7;
+    opacity: 0.55;
 }
 
 /* 6 unique organic float animations */
@@ -1152,12 +1154,10 @@ section {
         font-size: 2rem;
     }
 
-    /* Smaller floating elements on mobile, hide some */
+    /* Smaller floating elements on mobile */
     .floating-ingredient {
-        max-width: 60px !important;
-    }
-    .floating-ingredient:nth-child(n+4) {
-        display: none;
+        max-width: 120px !important;
+        opacity: 0.4 !important;
     }
 }
 

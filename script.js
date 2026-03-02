@@ -216,17 +216,41 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
-//  HERO TITLE FADE-OUT ON SCROLL
+//  HERO VIDEO SCROLL-SCRUB + TITLE FADE-OUT
 // ════════════════════════════════════════════════
 
+const heroVideo = document.getElementById('heroVideo');
 const heroTitleOverlay = document.getElementById('heroTitleOverlay');
-if (heroTitleOverlay) {
+
+if (heroVideo) {
+    // Wait for video metadata to load so we know the duration
+    heroVideo.addEventListener('loadedmetadata', () => {
+        heroVideo.currentTime = 0;
+    });
+    // Force load
+    heroVideo.load();
+
+    // Scroll-scrub: map scroll position to video timeline
+    const heroScrollSpacer = document.querySelector('.hero-scroll-spacer');
+    
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
-        const fadeStart = window.innerHeight * 0.15; // start fading at 15% scroll
-        const fadeEnd = window.innerHeight * 0.7;    // fully faded by 70%
-        const progress = Math.min(Math.max((scrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
-        heroTitleOverlay.style.opacity = 1 - progress;
+        const spacerHeight = heroScrollSpacer ? heroScrollSpacer.offsetHeight : window.innerHeight * 2;
+        
+        // Map scroll to video time (0 → duration)
+        if (heroVideo.duration && isFinite(heroVideo.duration)) {
+            const maxScroll = spacerHeight;
+            const scrollFraction = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+            heroVideo.currentTime = scrollFraction * heroVideo.duration;
+        }
+        
+        // Fade out hero title
+        if (heroTitleOverlay) {
+            const fadeStart = window.innerHeight * 0.15;
+            const fadeEnd = window.innerHeight * 0.7;
+            const progress = Math.min(Math.max((scrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
+            heroTitleOverlay.style.opacity = 1 - progress;
+        }
     }, { passive: true });
 }
 
@@ -313,55 +337,37 @@ if (scrollBlendContainer && scrollBlendSections) {
         );
     }
 
-    // Floating ingredient images per shake
+    // Floating ingredient images — 3 BIG elements per shake, spread left / center / right
     const floatingImages = {
         "Oreo Delight": [
-            { src: "images/floating/oreo-delight-float-1.webp", top: "75%", left: "3%", width: "100px" },
-            { src: "images/floating/oreo-delight-float-2.webp", top: "15%", right: "5%", width: "80px" },
-            { src: "images/floating/oreo-delight-float-3.webp", top: "25%", left: "8%", width: "120px" },
-            { src: "images/floating/oreo-delight-float-1.webp", bottom: "20%", right: "10%", width: "70px" },
-            { src: "images/floating/oreo-delight-float-2.webp", top: "50%", left: "2%", width: "60px" },
-            { src: "images/floating/oreo-delight-float-3.webp", bottom: "10%", left: "15%", width: "90px" }
+            { src: "images/floating/oreo-delight-float-1.webp", top: "55%", left: "2%", width: "280px" },
+            { src: "images/floating/oreo-delight-float-2.webp", top: "8%", left: "35%", width: "250px" },
+            { src: "images/floating/oreo-delight-float-3.webp", top: "20%", right: "2%", width: "300px" }
         ],
         "Strawberry Dream": [
-            { src: "images/floating/strawberry-dream-float-1.webp", top: "10%", left: "5%", width: "110px" },
-            { src: "images/floating/strawberry-dream-float-2.webp", top: "30%", right: "3%", width: "90px" },
-            { src: "images/floating/strawberry-dream-float-3.webp", bottom: "15%", left: "8%", width: "100px" },
-            { src: "images/floating/strawberry-dream-float-1.webp", bottom: "30%", right: "8%", width: "80px" },
-            { src: "images/floating/strawberry-dream-float-2.webp", top: "55%", left: "2%", width: "70px" },
-            { src: "images/floating/strawberry-dream-float-3.webp", top: "5%", right: "12%", width: "85px" }
+            { src: "images/floating/strawberry-dream-float-1.webp", top: "15%", left: "3%", width: "300px" },
+            { src: "images/floating/strawberry-dream-float-2.webp", top: "50%", left: "30%", width: "260px" },
+            { src: "images/floating/strawberry-dream-float-3.webp", top: "10%", right: "3%", width: "280px" }
         ],
         "Milo Magic": [
-            { src: "images/floating/milo-magic-float-1.webp", top: "12%", left: "4%", width: "120px" },
-            { src: "images/floating/milo-magic-float-2.webp", top: "20%", right: "6%", width: "75px" },
-            { src: "images/floating/milo-magic-float-3.webp", bottom: "18%", right: "4%", width: "85px" },
-            { src: "images/floating/milo-magic-float-1.webp", bottom: "25%", left: "10%", width: "95px" },
-            { src: "images/floating/milo-magic-float-2.webp", top: "45%", right: "15%", width: "65px" },
-            { src: "images/floating/milo-magic-float-3.webp", top: "60%", left: "3%", width: "70px" }
+            { src: "images/floating/milo-magic-float-1.webp", top: "50%", left: "2%", width: "320px" },
+            { src: "images/floating/milo-magic-float-2.webp", top: "10%", left: "32%", width: "240px" },
+            { src: "images/floating/milo-magic-float-3.webp", top: "25%", right: "3%", width: "260px" }
         ],
         "Jäger Shake": [
-            { src: "images/floating/jager-shake-float-1.webp", top: "8%", right: "5%", width: "100px" },
-            { src: "images/floating/jager-shake-float-2.webp", top: "35%", left: "4%", width: "90px" },
-            { src: "images/floating/jager-shake-float-3.webp", bottom: "12%", right: "8%", width: "80px" },
-            { src: "images/floating/jager-shake-float-1.webp", bottom: "30%", left: "6%", width: "75px" },
-            { src: "images/floating/jager-shake-float-2.webp", top: "55%", right: "3%", width: "70px" },
-            { src: "images/floating/jager-shake-float-3.webp", top: "15%", left: "12%", width: "85px" }
+            { src: "images/floating/jager-shake-float-1.webp", top: "12%", left: "3%", width: "280px" },
+            { src: "images/floating/jager-shake-float-2.webp", top: "55%", left: "28%", width: "260px" },
+            { src: "images/floating/jager-shake-float-3.webp", top: "18%", right: "2%", width: "300px" }
         ],
         "Amarula Bliss": [
-            { src: "images/floating/amarula-bliss-float-1.webp", top: "10%", left: "6%", width: "110px" },
-            { src: "images/floating/amarula-bliss-float-2.webp", top: "25%", right: "4%", width: "85px" },
-            { src: "images/floating/amarula-bliss-float-3.webp", bottom: "15%", left: "3%", width: "95px" },
-            { src: "images/floating/amarula-bliss-float-1.webp", bottom: "25%", right: "10%", width: "70px" },
-            { src: "images/floating/amarula-bliss-float-2.webp", top: "50%", left: "2%", width: "60px" },
-            { src: "images/floating/amarula-bliss-float-3.webp", top: "8%", right: "15%", width: "80px" }
+            { src: "images/floating/amarula-bliss-float-1.webp", top: "18%", left: "2%", width: "300px" },
+            { src: "images/floating/amarula-bliss-float-2.webp", top: "8%", left: "33%", width: "250px" },
+            { src: "images/floating/amarula-bliss-float-3.webp", top: "50%", right: "3%", width: "280px" }
         ],
         "Strawberry Kiss": [
-            { src: "images/floating/strawberry-kiss-float-1.webp", top: "12%", right: "6%", width: "90px" },
-            { src: "images/floating/strawberry-kiss-float-2.webp", top: "30%", left: "5%", width: "100px" },
-            { src: "images/floating/strawberry-kiss-float-3.webp", bottom: "18%", right: "4%", width: "80px" },
-            { src: "images/floating/strawberry-kiss-float-1.webp", bottom: "30%", left: "8%", width: "75px" },
-            { src: "images/floating/strawberry-kiss-float-2.webp", top: "55%", right: "12%", width: "65px" },
-            { src: "images/floating/strawberry-kiss-float-3.webp", top: "5%", left: "15%", width: "85px" }
+            { src: "images/floating/strawberry-kiss-float-1.webp", top: "50%", left: "3%", width: "280px" },
+            { src: "images/floating/strawberry-kiss-float-2.webp", top: "10%", left: "30%", width: "260px" },
+            { src: "images/floating/strawberry-kiss-float-3.webp", top: "15%", right: "2%", width: "300px" }
         ]
     };
 
