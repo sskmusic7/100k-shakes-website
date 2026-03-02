@@ -11,6 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Fixed Cape Town video layer -->
+    <div class="inner-hero-video-layer">
+        <video id="innerHeroVideo" muted playsinline preload="auto">
+            <source src="images/hero-video.mp4?v=2" media="(min-width: 769px)" type="video/mp4">
+            <source src="images/hero-video-mobile.mp4?v=2" type="video/mp4">
+        </video>
+        <div class="hero-image-overlay"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -39,9 +48,13 @@
 
     <!-- Page Header -->
     <section class="page-header">
+        <div class="page-header-content">
         <h1>Shot<span class="script-font">Shakes</span></h1>
         <p>Where premium spirits meet premium milkshakes</p>
+            </div>
     </section>
+
+    <div class="inner-page-curtain">
 
     <!-- Hero Section -->
     <section class="content-section" style="background: linear-gradient(135deg, var(--primary-brown) 0%, var(--deep-brown) 100%); color: var(--off-white); padding: 6rem 0;">
@@ -221,6 +234,7 @@
         </div>
     </footer>
 
+    </div><!-- /.inner-page-curtain -->
     <script src="script.js"></script>
 </body>
 </html>

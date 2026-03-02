@@ -85,32 +85,27 @@
   },
   {
     "original": "jager-shake_1.webp",
-    "new": "jager-shake.webp",
-    "item": "J\u00e4ger Shake",
-    "vision_result": "J\u00e4ger Shake"
-  },
-  {
-    "original": "chocolate-fudge.webp",
-    "new": "double-chocolate-cone.webp",
-    "item": "Double Chocolate Cone",
-    "vision_result": "Double Chocolate Cone"
+    "new": null,
+    "error": "Vision API failed"
   },
   {
     "original": "classic-vanilla-cone.webp",
-    "new": "classic-vanilla-cone_1.webp",
-    "item": "Classic Vanilla Cone",
-    "vision_result": "Classic Vanilla Cone"
+    "new": null,
+    "error": "Vision API failed"
   },
   {
-    "original": "oreo-delight.webp",
-    "new": "oreo-delight_1.webp",
-    "item": "Oreo Delight",
-    "vision_result": "Oreo Delight"
+    "original": "classic-vanilla-cone_1.webp",
+    "new": null,
+    "error": "Vision API failed"
+  },
+  {
+    "original": "double-chocolate-cone_1.webp",
+    "new": null,
+    "error": "Vision API failed"
   },
   {
     "original": "strawberry-swirl-cone.webp",
-    "new": "strawberry-swirl-cone_1.webp",
-    "item": "Strawberry Swirl Cone",
-    "vision_result": "Strawberry Swirl Cone"
+    "new": null,
+    "error": "Vision API failed"
   }
 ]

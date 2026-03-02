@@ -1,8 +1,7 @@
 {
-  "classic-vanilla-cone": "images/classic-vanilla-cone.jpg",
   "strawberry-swirl-cone": "images/strawberry-swirl-cone.jpg",
+  "classic-vanilla-cone": "images/classic-vanilla-cone.jpg",
   "double-chocolate-cone": "images/double-chocolate-cone.jpg",
-  "oreo-delight": "images/oreo-delight.jpg",
   "espresso-martini-shake": "images/espresso-martini-shake.jpg",
   "baileys-berry": "images/baileys-berry.jpg",
   "amarula-bliss": "images/amarula-bliss.jpg",
@@ -12,6 +11,7 @@
   "milo-magic": "images/milo-magic.jpg",
   "strawberry-dream": "images/strawberry-dream.jpg",
   "caramel-swirl": "images/caramel-swirl.jpg",
+  "oreo-delight": "images/oreo-delight.jpg",
   "vegan-strawberry-bliss": "images/vegan-strawberry-bliss.png",
   "vegan-chocolate-dream": "images/vegan-chocolate-dream.png",
   "caramel-crunch-cone": "images/caramel-crunch-cone.png"

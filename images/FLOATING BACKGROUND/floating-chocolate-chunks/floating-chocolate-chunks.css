@@ -1,0 +1,339 @@
+/*
+ * FLOATING CHOCOLATE CHUNKS EFFECT
+ * For Ice Cream Project - One implementation per flavor
+ *
+ * FEATURES:
+ * - Super slow organic floating animations (8-15 seconds)
+ * - Multiple randomized movement patterns (X, Y, rotation, scale)
+ * - Parallax depth effect (forward/backward movement)
+ * - All chunks float BEHIND main content
+ */
+
+/* Base floating chocolate chunk styles */
+.chocolate-chunk {
+  /* Shadow creates depth - makes it look like it's floating BEHIND the content */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+              0 8px 20px rgba(0, 0, 0, 0.3);
+
+  /* Default animation (will be overridden by specific chunks) */
+  animation: float-drift-1 12s ease-in-out infinite;
+
+  /* Ensure chunks float BEHIND main content */
+  position: absolute;
+  z-index: -1;
+
+  /* Smooth transitions */
+  transition: transform 0.5s ease;
+
+  /* Slight rotation start for organic feel */
+  transform-origin: center center;
+}
+
+/* ===== DIFFERENT ORGANIC FLOAT PATTERNS ===== */
+/* Each chunk gets a unique randomized animation */
+
+/* Chunk 1: Gentle diagonal drift with subtle rotation */
+.chocolate-chunk:nth-child(1) {
+  animation: float-drift-1 15s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+/* Chunk 2: Circular meandering with depth parallax */
+.chocolate-chunk:nth-child(2) {
+  animation: float-drift-2 12s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Chunk 3: Vertical bob with side-to-side sway */
+.chocolate-chunk:nth-child(3) {
+  animation: float-drift-3 10s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+/* Chunk 4: Figure-8 pattern with scale changes */
+.chocolate-chunk:nth-child(4) {
+  animation: float-drift-4 14s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* Chunk 5: Deep parallax - moves forward and backward */
+.chocolate-chunk:nth-child(5) {
+  animation: float-drift-5 13s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+/* Chunk 6: Gentle spiral */
+.chocolate-chunk:nth-child(6) {
+  animation: float-drift-6 11s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+/* Chunk 7: Slow hover with rotation */
+.chocolate-chunk:nth-child(7) {
+  animation: float-drift-7 16s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+/* Chunk 8: Random wander */
+.chocolate-chunk:nth-child(8) {
+  animation: float-drift-8 9s ease-in-out infinite;
+  animation-delay: -6s;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+/* Each animation has unique movement patterns */
+
+/* Animation 1: Diagonal drift with slight rotation */
+@keyframes float-drift-1 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(15px, -20px) rotate(3deg) scale(1.02);
+  }
+  50% {
+    transform: translate(-10px, -35px) rotate(-2deg) scale(1.05);
+  }
+  75% {
+    transform: translate(-20px, -15px) rotate(2deg) scale(1.02);
+  }
+}
+
+/* Animation 2: Circular meander with depth */
+@keyframes float-drift-2 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  20% {
+    transform: translate(20px, -15px) rotate(5deg) scale(1.08);
+  }
+  40% {
+    transform: translate(10px, -30px) rotate(3deg) scale(1.05);
+  }
+  60% {
+    transform: translate(-15px, -25px) rotate(-3deg) scale(1.02);
+  }
+  80% {
+    transform: translate(-10px, -10px) rotate(-2deg) scale(0.98);
+  }
+}
+
+/* Animation 3: Vertical bob with sway */
+@keyframes float-drift-3 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(-18px, -25px) rotate(-4deg) scale(1.03);
+  }
+  66% {
+    transform: translate(18px, -40px) rotate(4deg) scale(1.06);
+  }
+}
+
+/* Animation 4: Figure-8 with parallax */
+@keyframes float-drift-4 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(25px, -20px) rotate(6deg) scale(1.1);
+  }
+  50% {
+    transform: translate(0, -45px) rotate(0deg) scale(1.05);
+  }
+  75% {
+    transform: translate(-25px, -20px) rotate(-6deg) scale(0.95);
+  }
+}
+
+/* Animation 5: DEEP parallax - forward/backward */
+@keyframes float-drift-5 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(0.9);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translate(12px, -18px) rotate(4deg) scale(1.05);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-8px, -35px) rotate(-2deg) scale(1.15);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-15px, -20px) rotate(-4deg) scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Animation 6: Gentle spiral */
+@keyframes float-drift-6 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  20% {
+    transform: translate(15px, -10px) rotate(8deg) scale(1.04);
+  }
+  40% {
+    transform: translate(5px, -25px) rotate(4deg) scale(1.06);
+  }
+  60% {
+    transform: translate(-20px, -20px) rotate(-4deg) scale(1.03);
+  }
+  80% {
+    transform: translate(-10px, -8px) rotate(-8deg) scale(0.97);
+  }
+}
+
+/* Animation 7: Super slow hover with rotation */
+@keyframes float-drift-7 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(8px, -30px) rotate(10deg) scale(1.08);
+  }
+  66% {
+    transform: translate(-8px, -50px) rotate(-10deg) scale(1.04);
+  }
+}
+
+/* Animation 8: Random wander */
+@keyframes float-drift-8 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(2deg) scale(1);
+  }
+  25% {
+    transform: translate(-22px, -12px) rotate(-5deg) scale(0.96);
+  }
+  50% {
+    transform: translate(15px, -28px) rotate(7deg) scale(1.09);
+  }
+  75% {
+    transform: translate(-5px, -38px) rotate(-3deg) scale(1.02);
+  }
+}
+
+/* ===== POSITIONING EXAMPLES ===== */
+/* Position each chunk where you want it on screen */
+
+.chocolate-chunk.position-1 {
+  top: 8%;
+  left: 3%;
+  width: 80px;
+}
+
+.chocolate-chunk.position-2 {
+  top: 15%;
+  right: 8%;
+  width: 100px;
+}
+
+.chocolate-chunk.position-3 {
+  top: 35%;
+  left: 5%;
+  width: 70px;
+}
+
+.chocolate-chunk.position-4 {
+  top: 25%;
+  right: 3%;
+  width: 90px;
+}
+
+.chocolate-chunk.position-5 {
+  bottom: 20%;
+  left: 12%;
+  width: 85px;
+}
+
+.chocolate-chunk.position-6 {
+  bottom: 35%;
+  right: 6%;
+  width: 75px;
+}
+
+.chocolate-chunk.position-7 {
+  bottom: 15%;
+  left: 8%;
+  width: 95px;
+}
+
+.chocolate-chunk.position-8 {
+  top: 45%;
+  right: 15%;
+  width: 65px;
+}
+
+/* ===== VARIATIONS PER FLAVOR ===== */
+/* Customize shadow color/intensity per flavor */
+
+/* Vanilla - lighter shadow */
+.chocolate-chunk.vanilla {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25),
+              0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Chocolate - darker shadow */
+.chocolate-chunk.chocolate {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+              0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Strawberry - reddish shadow hint */
+.chocolate-chunk.strawberry {
+  box-shadow: 0 15px 35px rgba(50, 0, 20, 0.3),
+              0 5px 15px rgba(50, 0, 20, 0.2);
+}
+
+/* Mint - cool shadow */
+.chocolate-chunk.mint {
+  box-shadow: 0 15px 35px rgba(0, 50, 30, 0.3),
+              0 5px 15px rgba(0, 50, 30, 0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .chocolate-chunk {
+    width: 50px !important; /* Smaller on mobile */
+  }
+
+  /* Show only 4 chunks on mobile, hide the rest */
+  .chocolate-chunk.position-5,
+  .chocolate-chunk.position-6,
+  .chocolate-chunk.position-7,
+  .chocolate-chunk.position-8 {
+    display: none;
+  }
+
+  /* Reposition remaining chunks */
+  .chocolate-chunk.position-1 {
+    top: 5%;
+    left: 5%;
+  }
+
+  .chocolate-chunk.position-2 {
+    top: 10%;
+    right: 5%;
+  }
+
+  .chocolate-chunk.position-3 {
+    bottom: 15%;
+    left: 8%;
+  }
+
+  .chocolate-chunk.position-4 {
+    bottom: 10%;
+    right: 8%;
+  }
+}
+
+/* ===== MAIN CONTENT ZINDEX ===== */
+/* Make sure your main content has higher z-index */
+.content,
+main,
+.main-content {
+  position: relative;
+  z-index: 1;
+}

@@ -258,7 +258,7 @@ body {
 /* ── Scroll spacer (invisible, keeps hero visible while scrolling) ── */
 .hero-scroll-spacer {
     position: relative;
-    height: calc(100vh + 70px); /* hero height + navbar */
+    height: 550vh; /* Long scroll — video nearly finishes before shakes appear */
     z-index: 0;
     pointer-events: none;
 }
@@ -672,12 +672,51 @@ section {
    PAGE SPECIFIC STYLES
    ============================================ */
 
+/* ── INNER PAGE HERO (behind-layer technique, short version) ── */
+.inner-hero-video-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.inner-hero-video-layer video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.inner-hero-video-layer .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+}
+
 .page-header {
-    background: linear-gradient(135deg, var(--primary-brown) 0%, var(--deep-brown) 100%);
+    position: relative;
+    z-index: 2;
     color: var(--off-white);
-    padding: 8rem 0 4rem;
+    padding: 0;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 0;
+    background: transparent;
+    /* scroll spacer — gives video scroll room before content shows */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-header-content {
+    text-align: center;
+    padding: 2rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
 
 .page-header h1 {
@@ -688,6 +727,16 @@ section {
 .page-header p {
     font-size: 1.2rem;
     opacity: 0.9;
+}
+
+/* Content slides up over the hero — same curtain technique */
+.inner-page-curtain {
+    position: relative;
+    z-index: 2;
+    background: var(--cream);
+    box-shadow: 0 -60px 100px rgba(0, 0, 0, 0.8);
+    min-height: 100vh;
+    border-radius: 24px 24px 0 0;
 }
 
 .content-section {
@@ -1228,7 +1277,7 @@ section {
     }
 
     .hero-scroll-spacer {
-        height: calc(100vh + 60px);
+        height: 400vh;
     }
 
     .section-title {

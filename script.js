@@ -256,6 +256,36 @@ if (heroVideo) {
 }
 
 // ════════════════════════════════════════════════
+//  INNER PAGE HERO VIDEO SCRUB
+// ════════════════════════════════════════════════
+
+const innerHeroVideo = document.getElementById('innerHeroVideo');
+if (innerHeroVideo) {
+    innerHeroVideo.load();
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        const pageHeader = document.querySelector('.page-header');
+        const maxScroll  = pageHeader ? pageHeader.offsetHeight : window.innerHeight;
+
+        // Scrub video with scroll
+        if (innerHeroVideo.duration && isFinite(innerHeroVideo.duration)) {
+            const fraction = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+            innerHeroVideo.currentTime = fraction * innerHeroVideo.duration;
+        }
+
+        // Fade page header title out as content curtain approaches
+        const innerTitle = document.querySelector('.page-header-content');
+        if (innerTitle) {
+            const fadeEnd   = maxScroll * 0.6;
+            const fadeStart = maxScroll * 0.1;
+            const progress  = Math.min(Math.max((scrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
+            innerTitle.style.opacity = 1 - progress;
+        }
+    }, { passive: true });
+}
+
+// ════════════════════════════════════════════════
 //  SCROLL-BLEND SHAKE SECTIONS
 // ════════════════════════════════════════════════
 
@@ -271,8 +301,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Popular",
             image: "images/oreo-delight-nobg.webp",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
-            bg: "#1A0533",      // Deep indigo — grey/white Oreo pops against purple
-            navAccent: "#3D1266", // Lighter purple accent for navbar
+            bg: "#00205B",      // Oreo brand dark navy blue
+            navAccent: "#003087", // Oreo blue accent
             category: "StraightShake"
         },
         {
@@ -280,8 +310,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
-            bg: "#5C0020",      // TRUE deep strawberry crimson — unmistakably red
-            navAccent: "#9B1040", // Warm raspberry accent for navbar
+            bg: "#5C0020",      // Deep strawberry crimson
+            navAccent: "#9B1040", // Raspberry accent
             category: "StraightShake"
         },
         {
@@ -289,8 +319,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Signature",
             image: "images/milo-magic-nobg.webp",
             desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
-            bg: "#0F1A2E",      // Deep navy — warm brown pops against cool blue
-            navAccent: "#1E3A5F", // Navy blue accent for navbar
+            bg: "#004D1A",      // Milo brand deep green
+            navAccent: "#006E25", // Milo green accent
             category: "StraightShake"
         },
         {
@@ -298,8 +328,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Premium · 18+",
             image: "images/jager-shake-nobg.webp",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
-            bg: "#0D2200",      // Jägermeister deep forest green
-            navAccent: "#1F4A00", // Jäger green accent for navbar
+            bg: "#2A1000",      // Deep amber/brown — Jäger orange-brown theme
+            navAccent: "#7A3500", // Burnt orange-brown Jäger accent
             category: "ShotShake"
         },
         {
@@ -307,8 +337,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Luxury · 18+",
             image: "images/amarula-bliss-nobg.webp",
             desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
-            bg: "#2A1040",      // Royal purple — warm beige/gold pops against plum
-            navAccent: "#5A2080", // Rich violet accent for navbar
+            bg: "#2D3D1A",      // Dark pistachio/sage green — Amarula feel
+            navAccent: "#4A6828", // Pistachio accent
             category: "ShotShake"
         },
         {
@@ -316,8 +346,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
-            bg: "#4A0020",      // Deep rose — strawberry on dark pink
-            navAccent: "#8B1045", // Rose-red accent for navbar
+            bg: "#4A0020",      // Deep rose — Strawberry Lips brand pink
+            navAccent: "#8B1045", // Rose-red accent
             category: "ShotShake"
         }
     ];
