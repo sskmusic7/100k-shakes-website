@@ -18,13 +18,8 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar scroll effect + dynamic accent colour
+// Navbar scroll effect
 const navbar = document.getElementById('navbar');
-
-// Section accent colours for the navbar (complementary, semi-transparent)
-// Set later once featuredShakes is defined — stored here for access in scroll handler
-window._navAccents = null;
-window._navActiveBg = null;
 
 window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
@@ -32,9 +27,13 @@ window.addEventListener('scroll', () => {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+        // Back in hero zone — go transparent
+        if (navbar) {
+            navbar.style.background = 'transparent';
+            navbar.style.backdropFilter = 'none';
+        }
     }
-    // Dynamic accent handled in the main scroll-blend scroll handler below
-});
+}, { passive: true });
 
 // Carousel functionality
 const carouselTrack = document.getElementById('carouselTrack');
@@ -417,99 +416,49 @@ if (scrollBlendContainer && scrollBlendSections) {
         scrollBlendSections.appendChild(section);
     });
 
-    // Color blending on scroll — curtain bg + navbar accent
-    const firstBg = featuredShakes[0].bg;
-    const firstAccent = featuredShakes[0].navAccent;
-    const bgColors    = [firstBg,     ...featuredShakes.map(s => s.bg),        featuredShakes[featuredShakes.length - 1].bg];
-    const accentColors = [firstAccent, ...featuredShakes.map(s => s.navAccent), featuredShakes[featuredShakes.length - 1].navAccent];
-    const totalSections = featuredShakes.length;
-
-    // Set initial curtain background
+    // ── Set initial curtain background ──
     if (mainContentCurtain) {
-        mainContentCurtain.style.backgroundColor = firstBg;
+        mainContentCurtain.style.backgroundColor = featuredShakes[0].bg;
     }
 
-    // Helper to convert hex to rgba string
+    // Helper: hex → rgba string
     function hexToRgba(hex, alpha) {
         const [r, g, b] = hexToRgb(hex);
         return `rgba(${r},${g},${b},${alpha})`;
     }
 
-    function onScroll() {
-        if (!mainContentCurtain) return;
-
-        const curtainTop = mainContentCurtain.offsetTop;
-        const scrollTop  = window.pageYOffset;
-        const relativeScroll = scrollTop - curtainTop;
-
-        if (relativeScroll < 0) {
-            // Hero zone — transparent navbar
-            mainContentCurtain.style.backgroundColor = firstBg;
-            if (navbar && scrollTop <= 80) {
-                navbar.style.background = 'transparent';
-                navbar.style.backdropFilter = 'none';
-            }
-            return;
-        }
-
-        const sectionHeight = window.innerHeight;
-        const rawProgress   = relativeScroll / sectionHeight;
-        const sectionIndex  = Math.min(Math.floor(rawProgress), totalSections - 1);
-        const sectionProgress = rawProgress - sectionIndex;
-
-        // Lerp curtain background
-        if (sectionIndex < totalSections) {
-            const bgColor = lerpColor(bgColors[sectionIndex], bgColors[sectionIndex + 1], sectionProgress);
-            mainContentCurtain.style.backgroundColor = bgColor;
-
-            // Lerp navbar accent colour
-            if (navbar) {
-                const accentColor = lerpColor(accentColors[sectionIndex], accentColors[sectionIndex + 1], sectionProgress);
-                navbar.style.background = hexToRgba(accentColor, 0.82);
-                navbar.style.backdropFilter = 'blur(12px)';
-            }
-        }
-    }
-
-    // Throttle via rAF
-    let ticking = false;
-    function requestScroll() {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                onScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', requestScroll, { passive: true });
-    window.addEventListener('touchmove', requestScroll, { passive: true });
-
-    // Intersection Observer for entrance animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -20% 0px',
-        threshold: 0.3,
-    };
-
+    // ── Intersection Observer drives BOTH section visibility AND colours ──
+    // Using threshold 0.5 → fires when section is the dominant one in view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            const idx   = parseInt(entry.target.dataset.index);
+            const shake = featuredShakes[idx];
+
             if (entry.isIntersecting) {
+                // Show floating ingredients
                 entry.target.classList.add('visible');
+
+                // Curtain background → THIS section's colour
+                if (mainContentCurtain) {
+                    mainContentCurtain.style.backgroundColor = shake.bg;
+                }
+
+                // Navbar → matching accent colour for this section
+                if (navbar) {
+                    navbar.classList.add('scrolled');
+                    navbar.style.background    = hexToRgba(shake.navAccent, 0.88);
+                    navbar.style.backdropFilter = 'blur(14px)';
+                }
             } else {
                 entry.target.classList.remove('visible');
             }
         });
-    }, observerOptions);
-
-    // Observe all shake sections
-    document.querySelectorAll('.scroll-blend-section').forEach(section => {
-        observer.observe(section);
+    }, {
+        root: null,
+        threshold: 0.5,   // section must be >50% visible to be "active"
     });
 
-    // Initial color set
-    onScroll();
+    document.querySelectorAll('.scroll-blend-section').forEach(s => observer.observe(s));
 }
 
 
