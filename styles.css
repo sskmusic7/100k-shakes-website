@@ -53,15 +53,17 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(61, 40, 23, 0.95);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    backdrop-filter: none;
     z-index: 1000;
     padding: 1rem 0;
     transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(61, 40, 23, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -1025,18 +1027,32 @@ section {
     direction: ltr;
 }
 
+/* ── VIGNETTE EFFECT ON EACH SECTION ── */
+.scroll-blend-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 70% 65% at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.55) 100%
+    );
+}
+
 /* ── FLOATING INGREDIENT ELEMENTS ── */
 .floating-elements {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 2;
     pointer-events: none;
     overflow: hidden;
 }
 
 .floating-ingredient {
     position: absolute;
-    z-index: 0;
+    z-index: 2;
     opacity: 0;
     transition: opacity 1s ease;
     filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
@@ -1046,7 +1062,7 @@ section {
 
 /* Only show when section is visible */
 .scroll-blend-section.visible .floating-ingredient {
-    opacity: 0.55;
+    opacity: 0.75;
 }
 
 /* 6 unique organic float animations */
@@ -1123,10 +1139,10 @@ section {
     80% { transform: translate(-10px, -8px) rotate(-8deg) scale(0.97); }
 }
 
-/* Make sure scroll-blend content stays above floating elements */
+/* Make sure scroll-blend content stays above floating elements and vignette */
 .scroll-blend-content {
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 /* Mobile responsive */
@@ -1154,10 +1170,9 @@ section {
         font-size: 2rem;
     }
 
-    /* Smaller floating elements on mobile */
+    /* Slightly smaller floating elements on mobile */
     .floating-ingredient {
-        max-width: 120px !important;
-        opacity: 0.4 !important;
+        max-width: 140px !important;
     }
 }
 

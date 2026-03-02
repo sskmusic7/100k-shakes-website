@@ -270,7 +270,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Popular",
             image: "images/oreo-delight-nobg.webp",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
-            bg: "#1A0533", // Deep indigo — grey/white shake pops against purple
+            bg: "#1A0533", // Deep indigo — grey/white Oreo pops against purple
             category: "StraightShake"
         },
         {
@@ -278,7 +278,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
-            bg: "#0B3D2E", // Rich emerald — pink/red pops against green (complementary)
+            bg: "#3D0A1E", // Deep berry red — pink shake on dark red/crimson
             category: "StraightShake"
         },
         {
@@ -294,7 +294,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Premium · 18+",
             image: "images/jager-shake-nobg.webp",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
-            bg: "#2D0A0A", // Deep burgundy/oxblood — earthy shake contrasts rich red
+            bg: "#1A2E0A", // Jägermeister deep forest green — brand colour
             category: "ShotShake"
         },
         {
@@ -310,7 +310,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
-            bg: "#0A1A30", // Midnight blue — bright pink pops against deep blue
+            bg: "#4A0A20", // Deep rose/pink — strawberry shake on rich pink
             category: "ShotShake"
         }
     ];
