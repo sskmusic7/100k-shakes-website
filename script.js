@@ -18,20 +18,22 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar scroll effect
+// Navbar scroll effect + dynamic accent colour
 const navbar = document.getElementById('navbar');
-let lastScroll = 0;
+
+// Section accent colours for the navbar (complementary, semi-transparent)
+// Set later once featuredShakes is defined — stored here for access in scroll handler
+window._navAccents = null;
+window._navActiveBg = null;
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
+    const scrollY = window.pageYOffset;
+    if (scrollY > 80) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
-    lastScroll = currentScroll;
+    // Dynamic accent handled in the main scroll-blend scroll handler below
 });
 
 // Carousel functionality
@@ -270,7 +272,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Popular",
             image: "images/oreo-delight-nobg.webp",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
-            bg: "#1A0533", // Deep indigo — grey/white Oreo pops against purple
+            bg: "#1A0533",      // Deep indigo — grey/white Oreo pops against purple
+            navAccent: "#3D1266", // Lighter purple accent for navbar
             category: "StraightShake"
         },
         {
@@ -278,7 +281,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
-            bg: "#3D0A1E", // Deep berry red — pink shake on dark red/crimson
+            bg: "#5C0020",      // TRUE deep strawberry crimson — unmistakably red
+            navAccent: "#9B1040", // Warm raspberry accent for navbar
             category: "StraightShake"
         },
         {
@@ -286,7 +290,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Signature",
             image: "images/milo-magic-nobg.webp",
             desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
-            bg: "#0F1A2E", // Deep navy — warm brown pops against cool blue
+            bg: "#0F1A2E",      // Deep navy — warm brown pops against cool blue
+            navAccent: "#1E3A5F", // Navy blue accent for navbar
             category: "StraightShake"
         },
         {
@@ -294,7 +299,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Premium · 18+",
             image: "images/jager-shake-nobg.webp",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
-            bg: "#1A2E0A", // Jägermeister deep forest green — brand colour
+            bg: "#0D2200",      // Jägermeister deep forest green
+            navAccent: "#1F4A00", // Jäger green accent for navbar
             category: "ShotShake"
         },
         {
@@ -302,7 +308,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Luxury · 18+",
             image: "images/amarula-bliss-nobg.webp",
             desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
-            bg: "#2A1040", // Royal purple — warm beige/gold pops against plum
+            bg: "#2A1040",      // Royal purple — warm beige/gold pops against plum
+            navAccent: "#5A2080", // Rich violet accent for navbar
             category: "ShotShake"
         },
         {
@@ -310,7 +317,8 @@ if (scrollBlendContainer && scrollBlendSections) {
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
-            bg: "#4A0A20", // Deep rose/pink — strawberry shake on rich pink
+            bg: "#4A0020",      // Deep rose — strawberry on dark pink
+            navAccent: "#8B1045", // Rose-red accent for navbar
             category: "ShotShake"
         }
     ];
@@ -409,9 +417,11 @@ if (scrollBlendContainer && scrollBlendSections) {
         scrollBlendSections.appendChild(section);
     });
 
-    // Color blending on scroll — targets the curtain, not body
+    // Color blending on scroll — curtain bg + navbar accent
     const firstBg = featuredShakes[0].bg;
-    const bgColors = [firstBg, ...featuredShakes.map(s => s.bg), featuredShakes[featuredShakes.length - 1].bg];
+    const firstAccent = featuredShakes[0].navAccent;
+    const bgColors    = [firstBg,     ...featuredShakes.map(s => s.bg),        featuredShakes[featuredShakes.length - 1].bg];
+    const accentColors = [firstAccent, ...featuredShakes.map(s => s.navAccent), featuredShakes[featuredShakes.length - 1].navAccent];
     const totalSections = featuredShakes.length;
 
     // Set initial curtain background
@@ -419,29 +429,45 @@ if (scrollBlendContainer && scrollBlendSections) {
         mainContentCurtain.style.backgroundColor = firstBg;
     }
 
+    // Helper to convert hex to rgba string
+    function hexToRgba(hex, alpha) {
+        const [r, g, b] = hexToRgb(hex);
+        return `rgba(${r},${g},${b},${alpha})`;
+    }
+
     function onScroll() {
         if (!mainContentCurtain) return;
 
-        // Use the curtain's actual position in the document
         const curtainTop = mainContentCurtain.offsetTop;
-        const scrollTop = window.pageYOffset;
+        const scrollTop  = window.pageYOffset;
         const relativeScroll = scrollTop - curtainTop;
-        
+
         if (relativeScroll < 0) {
-            // Haven't reached the curtain yet — keep first bg
+            // Hero zone — transparent navbar
             mainContentCurtain.style.backgroundColor = firstBg;
+            if (navbar && scrollTop <= 80) {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+            }
             return;
         }
 
         const sectionHeight = window.innerHeight;
-        const rawProgress = relativeScroll / sectionHeight;
-        const sectionIndex = Math.min(Math.floor(rawProgress), totalSections - 1);
+        const rawProgress   = relativeScroll / sectionHeight;
+        const sectionIndex  = Math.min(Math.floor(rawProgress), totalSections - 1);
         const sectionProgress = rawProgress - sectionIndex;
 
-        // Lerp background color on the curtain
+        // Lerp curtain background
         if (sectionIndex < totalSections) {
             const bgColor = lerpColor(bgColors[sectionIndex], bgColors[sectionIndex + 1], sectionProgress);
             mainContentCurtain.style.backgroundColor = bgColor;
+
+            // Lerp navbar accent colour
+            if (navbar) {
+                const accentColor = lerpColor(accentColors[sectionIndex], accentColors[sectionIndex + 1], sectionProgress);
+                navbar.style.background = hexToRgba(accentColor, 0.82);
+                navbar.style.backdropFilter = 'blur(12px)';
+            }
         }
     }
 

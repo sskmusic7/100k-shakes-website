@@ -61,9 +61,15 @@ body {
 }
 
 .navbar.scrolled {
-    background: rgba(61, 40, 23, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    /* Fallback — JS overrides with section accent colour when in scroll-blend zone */
+    background: rgba(61, 40, 23, 0.88);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Smooth colour gradient transition on the navbar */
+.navbar {
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.3s ease;
 }
 
 .nav-container {
