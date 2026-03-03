@@ -265,14 +265,11 @@ body {
     margin-bottom: 1rem;
     line-height: 1.2;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    text-align: center;
 }
 
 .hero-title-main {
-    display: block;
+    display: inline-block;
 }
 
 .hero-title .script-font {
@@ -287,7 +284,7 @@ body {
     height: 48rem; /* 8x bigger (was 6rem) */
     width: auto;
     max-width: 90vw; /* Prevent overflow */
-    margin: 0 auto;
+    margin: 0 auto; /* Centered, right below "Indulgence" */
     object-fit: contain;
     object-position: center;
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
