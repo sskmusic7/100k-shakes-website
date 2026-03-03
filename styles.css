@@ -262,14 +262,21 @@ body {
 .hero-title {
     font-size: 4.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    margin-bottom: 0;
+    line-height: 1.1;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
+/* "INDULGENCE" — the star of the hero, big & bold & centered */
 .hero-title-main {
-    display: inline-block;
+    display: block;
+    font-size: 7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
 }
 
 .hero-title .script-font {
@@ -278,13 +285,31 @@ body {
     display: block;
 }
 
-/* Video replacement for "Elevated" word — 8x bigger */
+/* Elevated video wrapper — hidden on load, revealed on scroll */
+.elevated-video-wrap {
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.8s ease,
+                transform 0.8s ease;
+}
+
+.elevated-video-wrap.visible {
+    max-height: 50rem;         /* enough to reveal the video */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Video replacement for "Elevated" word */
 .elevated-word-video {
     display: block;
-    height: 48rem; /* 8x bigger (was 6rem) */
+    height: 48rem;
     width: auto;
-    max-width: 90vw; /* Prevent overflow */
-    margin: 0 auto; /* Centered, right below "Indulgence" */
+    max-width: 90vw;
+    margin: 0.5rem auto 0;
     object-fit: contain;
     object-position: center;
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
@@ -1353,12 +1378,20 @@ section {
         font-size: 2.8rem;
     }
 
+    .hero-title-main {
+        font-size: 4.5rem;
+    }
+
     .hero-title .script-font {
         font-size: 3.2rem;
     }
 
     .elevated-word-video {
-        height: 32rem; /* 8x bigger on tablet (was 4rem) */
+        height: 32rem;
+    }
+
+    .elevated-video-wrap.visible {
+        max-height: 35rem;
     }
 
     .hero-subtitle {
@@ -1426,12 +1459,20 @@ section {
         font-size: 2.2rem;
     }
 
+    .hero-title-main {
+        font-size: 3.5rem;
+    }
+
     .hero-title .script-font {
         font-size: 2.6rem;
     }
 
     .elevated-word-video {
-        height: 25.6rem; /* 8x bigger on mobile (was 3.2rem) */
+        height: 22rem;
+    }
+
+    .elevated-video-wrap.visible {
+        max-height: 24rem;
     }
 
     .hero-buttons {

@@ -260,17 +260,22 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
-//  ELEVATED VIDEO — PLAY ONCE, PAUSE ON LAST FRAME, RESTART AT TOP
+//  ELEVATED VIDEO — HIDDEN ON LOAD, REVEALED BY SCROLL, PLAY ONCE
 // ════════════════════════════════════════════════
 
 const elevatedVideo = document.getElementById('elevatedVideo');
+const elevatedWrap  = document.getElementById('elevatedWrap');
 let elevatedVideoHasPlayed = false;
+let elevatedVideoRevealed  = false;
 
 if (elevatedVideo) {
+    // Start at frame 0, paused (no autoplay)
+    elevatedVideo.pause();
+    elevatedVideo.currentTime = 0;
+
     // When video ends, pause on last frame (don't loop)
     elevatedVideo.addEventListener('ended', () => {
         elevatedVideoHasPlayed = true;
-        // Seek to last frame to ensure it stays there
         if (elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
             elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
         }
@@ -311,38 +316,46 @@ if (heroVideo) {
             heroVideo.currentTime = videoStartTime + (scrollFraction * (videoEndTime - videoStartTime));
         }
         
-        // Hero title fades out ONLY at the very end of scroll spacer (last 10%)
+        // ── Reveal "Elevated" video after ~10% scroll (a few seconds of scrolling) ──
+        const revealThreshold = spacerHeight * 0.08; // 8% of spacer ≈ a couple seconds of scroll
+        if (elevatedWrap) {
+            if (scrollY >= revealThreshold && !elevatedVideoRevealed) {
+                elevatedWrap.classList.add('visible');
+                elevatedVideoRevealed = true;
+                // Play video once it appears
+                if (elevatedVideo) {
+                    elevatedVideo.currentTime = 0;
+                    elevatedVideo.play().catch(() => {});
+                }
+            }
+            // Hide again if scrolled back to very top
+            if (scrollY < revealThreshold * 0.5 && elevatedVideoRevealed) {
+                elevatedWrap.classList.remove('visible');
+                elevatedVideoRevealed = false;
+                elevatedVideoHasPlayed = false;
+                if (elevatedVideo) {
+                    elevatedVideo.pause();
+                    elevatedVideo.currentTime = 0;
+                }
+            }
+        }
+
+        // ── Hero title fades out at the very end of spacer (last 10%) ──
         if (heroTitleOverlay) {
-            const fadeStart = spacerHeight * 0.9; // Last 10% of spacer
+            const fadeStart = spacerHeight * 0.9;
             const fadeEnd = spacerHeight;
             if (scrollY >= fadeStart) {
                 const progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
                 heroTitleOverlay.style.opacity = 1 - progress;
                 
-                // When hero fully fades out, ensure Elevated video stays on last frame
+                // Ensure Elevated video stays on last frame when hero fades
                 if (progress >= 1 && elevatedVideo && elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
-                    if (!elevatedVideo.paused) {
-                        elevatedVideo.pause();
-                    }
+                    if (!elevatedVideo.paused) elevatedVideo.pause();
                     elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
                 }
             } else {
-                heroTitleOverlay.style.opacity = 1; // Fully visible until fadeStart
-                
-                // When scrolling back up and hero becomes visible again, restart Elevated video
-                if (elevatedVideo && elevatedVideoHasPlayed && scrollY < fadeStart) {
-                    elevatedVideo.currentTime = 0;
-                    elevatedVideo.play().catch(() => {}); // Ignore play() promise errors
-                    elevatedVideoHasPlayed = false;
-                }
+                heroTitleOverlay.style.opacity = 1;
             }
-        }
-        
-        // Also restart Elevated video when scrolled all the way back to top
-        if (scrollY < 50 && elevatedVideo && elevatedVideoHasPlayed) {
-            elevatedVideo.currentTime = 0;
-            elevatedVideo.play().catch(() => {});
-            elevatedVideoHasPlayed = false;
         }
     }, { passive: true });
 }
