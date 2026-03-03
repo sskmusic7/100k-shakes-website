@@ -281,31 +281,21 @@ body {
     display: block;
 }
 
-/* Video replacement for "Elevated" word */
+/* Video replacement for "Elevated" word — 8x bigger */
 .elevated-word-video {
     display: block;
-    height: 6rem; /* Larger than text for impact */
+    height: 48rem; /* 8x bigger (was 6rem) */
     width: auto;
-    max-width: 100%;
+    max-width: 90vw; /* Prevent overflow */
     margin: 0 auto;
     object-fit: contain;
     object-position: center;
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
 }
 
-/* Fallback text: hide if video loads successfully */
+/* Fallback text: completely hidden — video replaces it entirely */
 .elevated-fallback {
-    display: none;
-}
-
-/* Show fallback if video fails to load (no WebM support) */
-@supports not (object-fit: contain) {
-    .elevated-word-video {
-        display: none;
-    }
-    .elevated-fallback {
-        display: block;
-    }
+    display: none !important;
 }
 
 .hero-subtitle {
@@ -1371,7 +1361,7 @@ section {
     }
 
     .elevated-word-video {
-        height: 4rem; /* Larger on tablet */
+        height: 32rem; /* 8x bigger on tablet (was 4rem) */
     }
 
     .hero-subtitle {
@@ -1444,7 +1434,7 @@ section {
     }
 
     .elevated-word-video {
-        height: 3.2rem; /* Larger on mobile */
+        height: 25.6rem; /* 8x bigger on mobile (was 3.2rem) */
     }
 
     .hero-buttons {

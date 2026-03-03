@@ -260,6 +260,25 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
+//  ELEVATED VIDEO — PLAY ONCE, PAUSE ON LAST FRAME, RESTART AT TOP
+// ════════════════════════════════════════════════
+
+const elevatedVideo = document.getElementById('elevatedVideo');
+let elevatedVideoHasPlayed = false;
+
+if (elevatedVideo) {
+    // When video ends, pause on last frame (don't loop)
+    elevatedVideo.addEventListener('ended', () => {
+        elevatedVideoHasPlayed = true;
+        // Seek to last frame to ensure it stays there
+        if (elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
+            elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
+        }
+        elevatedVideo.pause();
+    });
+}
+
+// ════════════════════════════════════════════════
 //  HERO VIDEO SCROLL-SCRUB + TITLE FADE-OUT
 // ════════════════════════════════════════════════
 
@@ -299,9 +318,31 @@ if (heroVideo) {
             if (scrollY >= fadeStart) {
                 const progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
                 heroTitleOverlay.style.opacity = 1 - progress;
+                
+                // When hero fully fades out, ensure Elevated video stays on last frame
+                if (progress >= 1 && elevatedVideo && elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
+                    if (!elevatedVideo.paused) {
+                        elevatedVideo.pause();
+                    }
+                    elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
+                }
             } else {
                 heroTitleOverlay.style.opacity = 1; // Fully visible until fadeStart
+                
+                // When scrolling back up and hero becomes visible again, restart Elevated video
+                if (elevatedVideo && elevatedVideoHasPlayed && scrollY < fadeStart) {
+                    elevatedVideo.currentTime = 0;
+                    elevatedVideo.play().catch(() => {}); // Ignore play() promise errors
+                    elevatedVideoHasPlayed = false;
+                }
             }
+        }
+        
+        // Also restart Elevated video when scrolled all the way back to top
+        if (scrollY < 50 && elevatedVideo && elevatedVideoHasPlayed) {
+            elevatedVideo.currentTime = 0;
+            elevatedVideo.play().catch(() => {});
+            elevatedVideoHasPlayed = false;
         }
     }, { passive: true });
 }
