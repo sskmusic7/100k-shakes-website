@@ -1,46 +1,152 @@
 // 100K SHAKES - MAIN JAVASCRIPT
 
 // ════════════════════════════════════════════════
-//  LOADING SCREEN
+//  LOADING SCREEN — REAL ASSET PRELOADER
+//  Buffers all videos + images behind the loading mask
+//  so animations and scrolling run smooth from frame 1
 // ════════════════════════════════════════════════
 
 const loadingScreen = document.getElementById('loadingScreen');
-const loadingBar = document.getElementById('loadingBar');
+const loadingBar    = document.getElementById('loadingBar');
 const loadingPercent = document.getElementById('loadingPercent');
 
+// Lock scroll while loading
 if (loadingScreen) {
-    let progress = 0;
-    
-    // Simulate loading progress
-    const updateProgress = () => {
-        progress += Math.random() * 15;
-        if (progress > 100) progress = 100;
-        
-        loadingBar.style.width = progress + '%';
-        loadingPercent.textContent = Math.floor(progress) + '%';
-        
-        if (progress < 100) {
-            setTimeout(updateProgress, 100 + Math.random() * 200);
-        } else {
-            // Wait for actual page load
-            if (document.readyState === 'complete') {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                    setTimeout(() => loadingScreen.remove(), 500);
-                }, 300);
-            } else {
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        loadingScreen.classList.add('hidden');
-                        setTimeout(() => loadingScreen.remove(), 500);
-                    }, 300);
-                });
-            }
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+}
+
+function dismissLoader() {
+    if (!loadingScreen) return;
+    // Unlock scroll
+    document.body.classList.remove('is-loading');
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    // Reset scroll to top so hero starts fresh
+    window.scrollTo(0, 0);
+    // Animate out
+    loadingScreen.classList.add('hidden');
+    setTimeout(() => loadingScreen.remove(), 600);
+}
+
+function setLoaderProgress(pct) {
+    if (loadingBar)     loadingBar.style.width = pct + '%';
+    if (loadingPercent) loadingPercent.textContent = Math.round(pct) + '%';
+}
+
+if (loadingScreen) {
+    // ── Collect every heavy asset on the page ──
+    const assetPromises = [];
+    let loaded = 0;
+    let totalAssets = 0;
+
+    // Helper: create a promise that resolves when an image is loaded
+    function preloadImage(src) {
+        return new Promise(resolve => {
+            const img = new Image();
+            img.onload  = resolve;
+            img.onerror = resolve; // don't block on broken images
+            img.src = src;
+        });
+    }
+
+    // Helper: create a promise that resolves when a video is buffered enough
+    function preloadVideo(videoEl) {
+        return new Promise(resolve => {
+            if (!videoEl) { resolve(); return; }
+            // "canplaythrough" = browser estimates it can play to end without buffering
+            if (videoEl.readyState >= 4) { resolve(); return; }
+            const onReady = () => {
+                videoEl.removeEventListener('canplaythrough', onReady);
+                resolve();
+            };
+            videoEl.addEventListener('canplaythrough', onReady);
+            // Timeout fallback — don't block forever (max 12s per video)
+            setTimeout(resolve, 12000);
+            // Ensure it's actually loading
+            videoEl.load();
+        });
+    }
+
+    // 1) VIDEOS — the heaviest assets
+    const heroVideo    = document.getElementById('heroVideo');
+    const elevatedVid  = document.getElementById('elevatedVideo');
+    if (heroVideo)    assetPromises.push(preloadVideo(heroVideo));
+    if (elevatedVid)  assetPromises.push(preloadVideo(elevatedVid));
+
+    // 2) IMAGES already in the DOM (carousel, social, etc.)
+    document.querySelectorAll('img[src]').forEach(img => {
+        if (!img.complete) {
+            assetPromises.push(preloadImage(img.src));
         }
-    };
-    
-    // Start loading animation
-    updateProgress();
+    });
+
+    // 3) Background images in inline styles (carousel shake-image divs)
+    document.querySelectorAll('[style*="background-image"]').forEach(el => {
+        const match = el.style.backgroundImage.match(/url\(['"]?(.+?)['"]?\)/);
+        if (match && match[1]) {
+            assetPromises.push(preloadImage(match[1]));
+        }
+    });
+
+    // 4) Key images that will be injected by JS later (scroll-blend shakes + floating)
+    const criticalImages = [
+        'images/oreo-delight-nobg.webp',
+        'images/strawberry-dream-nobg.webp',
+        'images/milo-magic-nobg.webp',
+        'images/jager-shake-nobg.webp',
+        'images/amarula-bliss-nobg.webp',
+        'images/strawberry-kiss-nobg.webp'
+    ];
+    criticalImages.forEach(src => assetPromises.push(preloadImage(src)));
+
+    // 5) Floating ingredient images (preload so they don't pop-in later)
+    const floatShakes = ['oreo-delight','strawberry-dream','milo-magic','jager-shake','amarula-bliss','strawberry-kiss'];
+    floatShakes.forEach(name => {
+        for (let i = 1; i <= 3; i++) {
+            assetPromises.push(preloadImage(`images/floating/${name}-float-${i}.webp`));
+        }
+    });
+
+    totalAssets = assetPromises.length;
+
+    // ── Track progress as each asset finishes ──
+    let smoothProgress = 0;
+    let targetProgress = 0;
+
+    // Smooth progress animation (don't jump, glide)
+    const progressInterval = setInterval(() => {
+        if (smoothProgress < targetProgress) {
+            smoothProgress += (targetProgress - smoothProgress) * 0.15; // ease toward target
+            if (targetProgress - smoothProgress < 0.5) smoothProgress = targetProgress;
+            setLoaderProgress(smoothProgress);
+        }
+    }, 30);
+
+    assetPromises.forEach(p => {
+        p.then(() => {
+            loaded++;
+            targetProgress = Math.min((loaded / totalAssets) * 100, 100);
+        });
+    });
+
+    // ── All done → dismiss ──
+    Promise.all(assetPromises).then(() => {
+        targetProgress = 100;
+        // Let the bar animate to 100% before dismissing
+        setTimeout(() => {
+            clearInterval(progressInterval);
+            setLoaderProgress(100);
+            setTimeout(dismissLoader, 400);
+        }, 300);
+    });
+
+    // ── Safety net: dismiss after 15s no matter what ──
+    setTimeout(() => {
+        clearInterval(progressInterval);
+        setLoaderProgress(100);
+        dismissLoader();
+    }, 15000);
 }
 
 // Mobile Menu Toggle

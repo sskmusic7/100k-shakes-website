@@ -49,13 +49,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    /* Block scroll while loading */
+    overflow: hidden;
 }
 
 .loading-screen.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+}
+
+/* Prevent any flash-of-content before JS runs */
+body.is-loading {
+    overflow: hidden !important;
 }
 
 .loading-content {
