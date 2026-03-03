@@ -1,137 +1,46 @@
 // 100K SHAKES - MAIN JAVASCRIPT
 
 // ════════════════════════════════════════════════
-//  LOADING SCREEN (0-100% progress)
+//  LOADING SCREEN
 // ════════════════════════════════════════════════
 
 const loadingScreen = document.getElementById('loadingScreen');
-const loadingCounter = loadingScreen ? loadingScreen.querySelector('.loading-counter') : null;
-const topBar = loadingScreen ? loadingScreen.querySelector('.top-bar') : null;
-const downBar = loadingScreen ? loadingScreen.querySelector('.down-bar') : null;
-const progressLine = loadingScreen ? loadingScreen.querySelector('.progress-line') : null;
+const loadingBar = document.getElementById('loadingBar');
+const loadingPercent = document.getElementById('loadingPercent');
 
 if (loadingScreen) {
-    // Prevent scrolling during load
-    document.body.classList.add('loading');
+    let progress = 0;
     
-    let percentage = 0;
-    let resourcesLoaded = 0;
-    let totalResources = 0;
-    
-    // Count all resources that need to load
-    const images = document.querySelectorAll('img');
-    const videos = document.querySelectorAll('video');
-    const heroVideo = document.getElementById('heroVideo');
-    
-    // Count resources
-    totalResources = images.length + videos.length + 1; // +1 for fonts
-    
-    // Track image loading
-    let imagesLoaded = 0;
-    images.forEach(img => {
-        if (img.complete) {
-            imagesLoaded++;
-            updateProgress();
+    // Simulate loading progress
+    const updateProgress = () => {
+        progress += Math.random() * 15;
+        if (progress > 100) progress = 100;
+        
+        loadingBar.style.width = progress + '%';
+        loadingPercent.textContent = Math.floor(progress) + '%';
+        
+        if (progress < 100) {
+            setTimeout(updateProgress, 100 + Math.random() * 200);
         } else {
-            img.addEventListener('load', () => {
-                imagesLoaded++;
-                updateProgress();
-            });
-            img.addEventListener('error', () => {
-                imagesLoaded++;
-                updateProgress();
-            });
+            // Wait for actual page load
+            if (document.readyState === 'complete') {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    setTimeout(() => loadingScreen.remove(), 500);
+                }, 300);
+            } else {
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                        setTimeout(() => loadingScreen.remove(), 500);
+                    }, 300);
+                });
+            }
         }
-    });
+    };
     
-    // Track video loading (especially hero video)
-    let videosLoaded = 0;
-    videos.forEach(video => {
-        if (video.readyState >= 2) { // HAVE_CURRENT_DATA
-            videosLoaded++;
-            updateProgress();
-        } else {
-            video.addEventListener('loadeddata', () => {
-                videosLoaded++;
-                updateProgress();
-            });
-            video.addEventListener('error', () => {
-                videosLoaded++;
-                updateProgress();
-            });
-        }
-    });
-    
-    // Track fonts loading
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-            updateProgress();
-        });
-    } else {
-        // Fallback: assume fonts load quickly
-        setTimeout(() => updateProgress(), 500);
-    }
-    
-    // Update progress counter
-    function updateProgress() {
-        resourcesLoaded = imagesLoaded + videosLoaded;
-        const baseProgress = Math.min((resourcesLoaded / totalResources) * 90, 90); // Max 90% from resources
-        
-        // Smooth counter animation
-        const targetProgress = Math.min(baseProgress + 10, 100); // Add 10% for smooth finish
-        
-        if (percentage < targetProgress) {
-            percentage = Math.min(percentage + 1, targetProgress);
-            updateLoadingDisplay();
-        }
-        
-        // If all resources loaded and we're at 100%, finish loading
-        if (resourcesLoaded >= totalResources && percentage >= 100) {
-            finishLoading();
-        }
-    }
-    
-    // Update visual display
-    function updateLoadingDisplay() {
-        if (loadingCounter) {
-            loadingCounter.textContent = Math.round(percentage) + '%';
-        }
-        if (topBar && downBar) {
-            const barHeight = (100 - percentage) / 2;
-            topBar.style.height = barHeight + '%';
-            downBar.style.height = barHeight + '%';
-        }
-        if (progressLine) {
-            progressLine.style.transform = 'scaleX(' + (percentage / 100) + ')';
-            progressLine.style.opacity = percentage > 10 ? 1 : 0;
-        }
-    }
-    
-    // Finish loading and hide screen
-    function finishLoading() {
-        percentage = 100;
-        updateLoadingDisplay();
-        
-        setTimeout(() => {
-            loadingScreen.style.opacity = '0';
-            loadingScreen.style.transition = 'opacity 0.5s ease';
-            
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                document.body.classList.remove('loading');
-                // Allow scrolling now
-                window.scrollTo(0, 0);
-            }, 500);
-        }, 300);
-    }
-    
-    // Fallback: ensure loading completes even if some resources fail
-    setTimeout(() => {
-        if (percentage < 100) {
-            percentage = 100;
-            finishLoading();
-        }
-    }, 5000); // Max 5 seconds loading time
+    // Start loading animation
+    updateProgress();
 }
 
 // Mobile Menu Toggle
@@ -372,19 +281,27 @@ if (heroVideo) {
         const scrollY = window.pageYOffset;
         const spacerHeight = heroScrollSpacer ? heroScrollSpacer.offsetHeight : window.innerHeight * 2;
         
-        // Map scroll to video time (0 → duration)
+        // Map scroll to video time — START AT 50% (halfway through video)
+        // Scroll 0 → spacerHeight maps to video 50% → 100%
         if (heroVideo.duration && isFinite(heroVideo.duration)) {
             const maxScroll = spacerHeight;
             const scrollFraction = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-            heroVideo.currentTime = scrollFraction * heroVideo.duration;
+            // Start at 50% of video, end at 100%
+            const videoStartTime = heroVideo.duration * 0.5;
+            const videoEndTime = heroVideo.duration;
+            heroVideo.currentTime = videoStartTime + (scrollFraction * (videoEndTime - videoStartTime));
         }
         
-        // Fade out hero title
+        // Hero title fades out ONLY at the very end of scroll spacer (last 10%)
         if (heroTitleOverlay) {
-            const fadeStart = window.innerHeight * 0.15;
-            const fadeEnd = window.innerHeight * 0.7;
-            const progress = Math.min(Math.max((scrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
-            heroTitleOverlay.style.opacity = 1 - progress;
+            const fadeStart = spacerHeight * 0.9; // Last 10% of spacer
+            const fadeEnd = spacerHeight;
+            if (scrollY >= fadeStart) {
+                const progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
+                heroTitleOverlay.style.opacity = 1 - progress;
+            } else {
+                heroTitleOverlay.style.opacity = 1; // Fully visible until fadeStart
+            }
         }
     }, { passive: true });
 }
@@ -591,38 +508,82 @@ if (scrollBlendContainer && scrollBlendSections) {
         return `rgba(${r},${g},${b},${alpha})`;
     }
 
-    // ── Intersection Observer drives BOTH section visibility AND colours ──
-    // Using threshold 0.5 → fires when section is the dominant one in view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const idx   = parseInt(entry.target.dataset.index);
-            const shake = featuredShakes[idx];
+    // ── Smooth scroll-based color blending (no instant snaps) ──
+    const sections = document.querySelectorAll('.scroll-blend-section');
+    const bgColors = featuredShakes.map(s => s.bg);
+    const accentColors = featuredShakes.map(s => s.navAccent);
 
-            if (entry.isIntersecting) {
-                // Show floating ingredients
-                entry.target.classList.add('visible');
+    function updateColorsOnScroll() {
+        if (!mainContentCurtain) return;
 
-                // Curtain background → THIS section's colour
-                if (mainContentCurtain) {
-                    mainContentCurtain.style.backgroundColor = shake.bg;
-                }
+        const scrollY = window.pageYOffset;
+        const curtainTop = mainContentCurtain.offsetTop;
+        const relativeScroll = scrollY - curtainTop;
 
-                // Navbar → matching accent colour for this section
-                if (navbar) {
-                    navbar.classList.add('scrolled');
-                    navbar.style.background    = hexToRgba(shake.navAccent, 0.88);
-                    navbar.style.backdropFilter = 'blur(14px)';
-                }
+        if (relativeScroll < 0) {
+            // Before curtain — use first color
+            mainContentCurtain.style.backgroundColor = bgColors[0];
+            if (navbar) {
+                navbar.style.background = hexToRgba(accentColors[0], 0.88);
+                navbar.style.backdropFilter = 'blur(14px)';
+            }
+            return;
+        }
+
+        const sectionHeight = window.innerHeight;
+        const sectionIndex = Math.floor(relativeScroll / sectionHeight);
+        const sectionProgress = (relativeScroll % sectionHeight) / sectionHeight;
+
+        // Smooth lerp between current and next section
+        if (sectionIndex < bgColors.length - 1) {
+            const currentBg = bgColors[sectionIndex];
+            const nextBg = bgColors[sectionIndex + 1];
+            const blendedBg = lerpColor(currentBg, nextBg, sectionProgress);
+            mainContentCurtain.style.backgroundColor = blendedBg;
+
+            const currentAccent = accentColors[sectionIndex];
+            const nextAccent = accentColors[sectionIndex + 1];
+            const blendedAccent = lerpColor(currentAccent, nextAccent, sectionProgress);
+            if (navbar) {
+                navbar.style.background = hexToRgba(blendedAccent, 0.88);
+                navbar.style.backdropFilter = 'blur(14px)';
+            }
+        } else {
+            // Last section — use final color
+            mainContentCurtain.style.backgroundColor = bgColors[bgColors.length - 1];
+            if (navbar) {
+                navbar.style.background = hexToRgba(accentColors[accentColors.length - 1], 0.88);
+                navbar.style.backdropFilter = 'blur(14px)';
+            }
+        }
+
+        // Show/hide sections based on scroll (for animations)
+        sections.forEach((section, idx) => {
+            const sectionTop = curtainTop + (idx * sectionHeight);
+            const sectionBottom = sectionTop + sectionHeight;
+            const isVisible = scrollY >= sectionTop - sectionHeight * 0.3 && scrollY < sectionBottom + sectionHeight * 0.3;
+            if (isVisible) {
+                section.classList.add('visible');
             } else {
-                entry.target.classList.remove('visible');
+                section.classList.remove('visible');
             }
         });
-    }, {
-        root: null,
-        threshold: 0.5,   // section must be >50% visible to be "active"
-    });
+    }
 
-    document.querySelectorAll('.scroll-blend-section').forEach(s => observer.observe(s));
+    // Throttled scroll handler for smooth color blending
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                updateColorsOnScroll();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    // Initial update
+    updateColorsOnScroll();
 }
 
 

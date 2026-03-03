@@ -34,6 +34,70 @@ body {
     background-color: var(--deep-brown);
 }
 
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--deep-brown);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-logo {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 3rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loading-logo .logo-accent {
+    font-family: 'Dancing Script', cursive;
+    color: var(--light-red);
+}
+
+.loading-bar-container {
+    width: 300px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 auto 1rem;
+}
+
+.loading-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--light-red), var(--strawberry-red));
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.loading-percent {
+    color: var(--off-white);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 .script-font {
     font-family: 'Dancing Script', cursive;
     font-weight: 700;
@@ -201,6 +265,14 @@ body {
     margin-bottom: 1rem;
     line-height: 1.2;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hero-title-main {
+    display: block;
 }
 
 .hero-title .script-font {
@@ -211,14 +283,13 @@ body {
 
 /* Video replacement for "Elevated" word */
 .elevated-word-video {
-    display: inline-block;
-    vertical-align: baseline;
-    height: 5rem; /* Match script-font size */
+    display: block;
+    height: 6rem; /* Larger than text for impact */
     width: auto;
+    max-width: 100%;
+    margin: 0 auto;
     object-fit: contain;
     object-position: center;
-    margin: 0;
-    padding: 0;
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
 }
 
@@ -1300,7 +1371,7 @@ section {
     }
 
     .elevated-word-video {
-        height: 3.2rem; /* Match tablet script-font size */
+        height: 4rem; /* Larger on tablet */
     }
 
     .hero-subtitle {
@@ -1373,7 +1444,7 @@ section {
     }
 
     .elevated-word-video {
-        height: 2.6rem; /* Match mobile script-font size */
+        height: 3.2rem; /* Larger on mobile */
     }
 
     .hero-buttons {

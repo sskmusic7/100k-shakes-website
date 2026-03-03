@@ -11,17 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">100K <span class="logo-accent">Shakes</span></div>
-            <div class="loading-bar-container">
-                <div class="loading-bar" id="loadingBar"></div>
-            </div>
-            <div class="loading-percent" id="loadingPercent">0%</div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -60,13 +49,9 @@
     <!-- ── FIXED HERO TITLE (stays visible until content slides over) ── -->
     <div class="hero-title-overlay" id="heroTitleOverlay">
         <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="hero-title-main">Indulgence</span>
-                <video class="elevated-word-video" autoplay muted loop playsinline>
-                    <source src="images/elevated-word.webm" type="video/webm">
-                </video>
-                <span class="script-font elevated-fallback">Elevated</span>
-            </h1>
+            <h1 class="hero-title">Indulgence <video class="elevated-word-video" autoplay muted loop playsinline>
+                <source src="images/elevated-word.webm" type="video/webm">
+            </video><span class="script-font elevated-fallback">Elevated</span></h1>
             <p class="hero-subtitle">Premium milkshakes reimagined with luxury ingredients and innovative twists</p>
         </div>
         <div class="hero-scroll-hint">
