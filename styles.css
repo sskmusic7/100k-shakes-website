@@ -305,6 +305,9 @@ body.is-loading {
     transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.8s ease,
                 transform 0.8s ease;
+    /* Dark bg matching hero — mix-blend-mode: screen on video
+       makes black video pixels merge into this dark tone = invisible */
+    background: rgba(42, 26, 14, 1);
 }
 
 .elevated-video-wrap.visible {
@@ -314,12 +317,13 @@ body.is-loading {
 }
 
 /* Video replacement for "Elevated" word */
+
 .elevated-word-video {
     display: block;
     height: 48rem;
     width: auto;
     max-width: 90vw;
-    margin: 0.5rem auto 0;
+    margin: 0 auto;
     object-fit: contain;
     object-position: center;
     /* mix-blend-mode: screen makes black pixels invisible,
