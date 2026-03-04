@@ -225,9 +225,6 @@ body.is-loading {
     height: 100%;
     object-fit: cover;
     object-position: center center;
-    /* Ensure square videos don't stretch weirdly on mobile */
-    min-width: 100%;
-    min-height: 100%;
 }
 
 .hero-image-overlay {
@@ -309,8 +306,9 @@ body.is-loading {
     transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.8s ease,
                 transform 0.8s ease;
-    /* Light background — multiply blend makes black pixels transparent */
-    background: rgba(255, 255, 255, 0.98);
+    /* Dark bg matching hero — mix-blend-mode: screen on video
+       makes black video pixels merge into this dark tone = invisible */
+    background: rgba(42, 26, 14, 1);
 }
 
 .elevated-video-wrap.visible {
@@ -328,11 +326,11 @@ body.is-loading {
     margin: 0 auto;
     object-fit: contain;
     object-position: center;
-    /* Multiply blend: black pixels become transparent on white background
-       Only the cherry/text (non-black pixels) remain visible */
-    mix-blend-mode: multiply;
-    /* Slight brightness boost to ensure cherry/text pops */
-    filter: brightness(1.05);
+    /* mix-blend-mode: screen makes black pixels invisible,
+       so the cherry + "Elevated" text float over the hero
+       without needing true alpha transparency.
+       Works on ALL browsers including iOS Safari. */
+    mix-blend-mode: screen;
     /* Force proper sizing */
     min-height: 20rem;
 }
