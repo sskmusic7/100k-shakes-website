@@ -1475,13 +1475,9 @@ section {
         font-size: 2.6rem;
     }
 
-    .elevated-word-video {
-        height: 25rem;
-        min-height: 20rem;
-    }
-
-    .elevated-video-wrap.visible {
-        max-height: 28rem;
+    .elevated-word-image {
+        height: 4rem;
+        max-width: 85vw;
     }
 
     .hero-buttons {
