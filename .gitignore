@@ -29,6 +29,22 @@ images/processed/
 !images/compressed/*.jpg
 !images/compressed/*.png
 
+# Video source files and backups (keep only final production videos)
+images/100K HERO VIDEOS/
+images/ELEVATED/
+images/*-alpha*.webm
+images/*-alpha*.mp4
+images/*-old*.mp4
+images/*-old*.webm
+images/*-backup*.*
+images/*-pre-alpha*.*
+images/elevated-word-*.mp4
+images/elevated-word-*.webm
+images/elevated-word-hevc.mov
+images/*.mov
+images/*-kling-*.mp4
+images/*-seedance-*.mp4
+
 # Environment variables
 .env
 .env.local

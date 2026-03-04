@@ -373,35 +373,13 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
-//  ELEVATED VIDEO — HIDDEN ON LOAD, REVEALED BY SCROLL, PLAY ONCE
-// ════════════════════════════════════════════════
-
-const elevatedVideo = document.getElementById('elevatedVideo');
-const elevatedWrap  = document.getElementById('elevatedWrap');
-let elevatedVideoHasPlayed = false;
-let elevatedVideoRevealed  = false;
-
-if (elevatedVideo) {
-    // Start at frame 0, paused (no autoplay)
-    elevatedVideo.pause();
-    elevatedVideo.currentTime = 0;
-
-    // When video ends, pause on last frame (don't loop)
-    elevatedVideo.addEventListener('ended', () => {
-        elevatedVideoHasPlayed = true;
-        if (elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
-            elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
-        }
-        elevatedVideo.pause();
-    });
-}
-
-// ════════════════════════════════════════════════
 //  HERO VIDEO SCROLL-SCRUB + TITLE FADE-OUT
 // ════════════════════════════════════════════════
 
 const heroVideo = document.getElementById('heroVideo');
 const heroTitleOverlay = document.getElementById('heroTitleOverlay');
+const elevatedImage = document.getElementById('elevatedImage');
+const heroTitleMain = document.querySelector('.hero-title-main');
 
 if (heroVideo) {
     // Wait for video metadata to load so we know the duration
@@ -413,11 +391,11 @@ if (heroVideo) {
 
     // Scroll-scrub: map scroll position to video timeline
     const heroScrollSpacer = document.querySelector('.hero-scroll-spacer');
-    
+
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
         const spacerHeight = heroScrollSpacer ? heroScrollSpacer.offsetHeight : window.innerHeight * 2;
-        
+
         // Map scroll to video time — START AT 50% (halfway through video)
         // Scroll 0 → spacerHeight maps to video 50% → 100%
         if (heroVideo.duration && isFinite(heroVideo.duration)) {
@@ -428,44 +406,14 @@ if (heroVideo) {
             const videoEndTime = heroVideo.duration;
             heroVideo.currentTime = videoStartTime + (scrollFraction * (videoEndTime - videoStartTime));
         }
-        
-        // ── Reveal "Elevated" video after ~10% scroll (a few seconds of scrolling) ──
-        const revealThreshold = spacerHeight * 0.08; // 8% of spacer ≈ a couple seconds of scroll
-        if (elevatedWrap) {
-            if (scrollY >= revealThreshold && !elevatedVideoRevealed) {
-                elevatedWrap.classList.add('visible');
-                elevatedVideoRevealed = true;
-                // Play video once it appears
-                if (elevatedVideo) {
-                    elevatedVideo.currentTime = 0;
-                    elevatedVideo.play().catch(() => {});
-                }
-            }
-            // Hide again if scrolled back to very top
-            if (scrollY < revealThreshold * 0.5 && elevatedVideoRevealed) {
-                elevatedWrap.classList.remove('visible');
-                elevatedVideoRevealed = false;
-                elevatedVideoHasPlayed = false;
-                if (elevatedVideo) {
-                    elevatedVideo.pause();
-                    elevatedVideo.currentTime = 0;
-                }
-            }
-        }
 
-        // ── Hero title fades out at the very end of spacer (last 10%) ──
+        // ── Hero title + Elevated image fade out at the very end of spacer (last 15%) ──
         if (heroTitleOverlay) {
-            const fadeStart = spacerHeight * 0.9;
+            const fadeStart = spacerHeight * 0.85;
             const fadeEnd = spacerHeight;
             if (scrollY >= fadeStart) {
                 const progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
                 heroTitleOverlay.style.opacity = 1 - progress;
-                
-                // Ensure Elevated video stays on last frame when hero fades
-                if (progress >= 1 && elevatedVideo && elevatedVideo.duration && isFinite(elevatedVideo.duration)) {
-                    if (!elevatedVideo.paused) elevatedVideo.pause();
-                    elevatedVideo.currentTime = elevatedVideo.duration - 0.1;
-                }
             } else {
                 heroTitleOverlay.style.opacity = 1;
             }

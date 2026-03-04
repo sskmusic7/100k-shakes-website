@@ -296,45 +296,31 @@ body.is-loading {
     display: block;
 }
 
-/* Elevated video wrapper — hidden on load, revealed on scroll */
-.elevated-video-wrap {
+/* Elevated word image — fades in with Indulgence, fades out on scroll */
+.elevated-word-image {
     display: inline-block;
-    overflow: visible;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.8s ease,
-                transform 0.8s ease;
-    /* Transparent wrapper so hero video shows through for screen blend mode */
-    background: transparent;
     vertical-align: middle;
-}
-
-.elevated-video-wrap.visible {
-    max-height: 50rem;         /* enough to reveal the video */
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Video replacement for "Elevated" word */
-.elevated-word-video {
-    display: block;
-    height: 48rem;
+    height: 5rem;
     width: auto;
     max-width: 90vw;
-    margin: 0 auto;
-    object-fit: contain;
-    object-position: center;
-    /* WebM has true alpha transparency - no blend mode needed
-       MP4 has black background from chroma key - use screen to make black transparent
-       This works for both formats */
-    mix-blend-mode: screen;
-    /* Force proper sizing */
-    min-height: 20rem;
+    margin-left: 0.5rem;
+    opacity: 0;
+    /* Fade in animation on load */
+    animation: fadeInElevated 1.2s ease-out 0.5s forwards;
 }
 
-/* Fallback text: completely hidden — video replaces it entirely */
+@keyframes fadeInElevated {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fallback text: completely hidden — image replaces it entirely */
 .elevated-fallback {
     display: none !important;
 }
