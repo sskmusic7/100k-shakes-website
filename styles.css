@@ -309,6 +309,10 @@ body.is-loading {
     /* SOLID dark brown background for screen blend mode to work correctly
        mix-blend-mode: screen makes black pixels invisible when composited */
     background: rgba(42, 26, 14, 1);
+    /* Create isolated stacking context for blend mode to work on mobile Safari */
+    isolation: isolate;
+    position: relative;
+    z-index: 1;
 }
 
 .elevated-video-wrap.visible {
