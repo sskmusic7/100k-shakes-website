@@ -224,6 +224,10 @@ body.is-loading {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
+    /* Ensure square videos don't stretch weirdly on mobile */
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .hero-image-overlay {
@@ -305,9 +309,8 @@ body.is-loading {
     transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.8s ease,
                 transform 0.8s ease;
-    /* Dark bg matching hero — mix-blend-mode: screen on video
-       makes black video pixels merge into this dark tone = invisible */
-    background: rgba(42, 26, 14, 1);
+    /* Transparent wrapper — video will blend directly with hero */
+    background: transparent;
 }
 
 .elevated-video-wrap.visible {
@@ -317,7 +320,6 @@ body.is-loading {
 }
 
 /* Video replacement for "Elevated" word */
-
 .elevated-word-video {
     display: block;
     height: 48rem;
@@ -326,11 +328,13 @@ body.is-loading {
     margin: 0 auto;
     object-fit: contain;
     object-position: center;
-    /* mix-blend-mode: screen makes black pixels invisible,
-       so the cherry + "Elevated" text float over the hero
-       without needing true alpha transparency.
-       Works on ALL browsers including iOS Safari. */
+    /* Use screen blend: inverts colors, then multiplies, then inverts again
+       Black pixels become transparent against dark backgrounds */
     mix-blend-mode: screen;
+    /* CSS filter to help remove any remaining green/black artifacts */
+    filter: brightness(1.1) contrast(1.05);
+    /* Force proper sizing */
+    min-height: 20rem;
 }
 
 /* Fallback text: completely hidden — video replaces it entirely */
@@ -1406,11 +1410,12 @@ section {
     }
 
     .elevated-word-video {
-        height: 24rem;
+        height: 32rem;
+        min-height: 24rem;
     }
 
     .elevated-video-wrap.visible {
-        max-height: 26rem;
+        max-height: 35rem;
     }
 
     .hero-subtitle {
@@ -1488,11 +1493,12 @@ section {
     }
 
     .elevated-word-video {
-        height: 18rem;
+        height: 25rem;
+        min-height: 20rem;
     }
 
     .elevated-video-wrap.visible {
-        max-height: 20rem;
+        max-height: 28rem;
     }
 
     .hero-buttons {
