@@ -54,31 +54,46 @@ if (loadingScreen) {
     function preloadVideo(videoEl) {
         return new Promise(resolve => {
             if (!videoEl) { resolve(); return; }
-            // "canplaythrough" = browser estimates it can play to end without buffering
-            if (videoEl.readyState >= 4) { resolve(); return; }
-            const onReady = () => {
-                videoEl.removeEventListener('canplaythrough', onReady);
-                resolve();
-            };
-            videoEl.addEventListener('canplaythrough', onReady);
-            // Timeout fallback — don't block forever (max 12s per video)
-            setTimeout(resolve, 12000);
-            // Ensure it's actually loading
+
+            // Force the video to start loading/buffering
             videoEl.load();
+
+            const checkReady = () => {
+                // Consider ready if we have enough data buffered
+                // HAVE_CURRENT_DATA (2) = can render current frame
+                // HAVE_FUTURE_DATA (3) = can play next frame
+                // HAVE_ENOUGH_DATA (4) = can play without buffering
+                if (videoEl.readyState >= 3) {
+                    videoEl.removeEventListener('canplay', checkReady);
+                    videoEl.removeEventListener('loadeddata', checkReady);
+                    resolve();
+                }
+            };
+
+            // Try multiple events to catch when video is ready
+            videoEl.addEventListener('canplay', checkReady, { once: true });
+            videoEl.addEventListener('loadeddata', checkReady, { once: true });
+
+            // Also check immediately in case already loaded
+            if (videoEl.readyState >= 3) {
+                resolve();
+                return;
+            }
+
+            // Timeout fallback — give it time to buffer (max 10s per video)
+            setTimeout(resolve, 10000);
         });
     }
 
     // 1) VIDEOS — the heaviest assets
     const heroVideo    = document.getElementById('heroVideo');
-    const elevatedVid  = document.getElementById('elevatedVideo');
     if (heroVideo)    assetPromises.push(preloadVideo(heroVideo));
-    if (elevatedVid)  assetPromises.push(preloadVideo(elevatedVid));
 
-    // 2) IMAGES already in the DOM (carousel, social, etc.)
+    // 2) IMAGES already in the DOM (carousel, social, elevated text, etc.)
     document.querySelectorAll('img[src]').forEach(img => {
-        if (!img.complete) {
-            assetPromises.push(preloadImage(img.src));
-        }
+        // Always preload images, even if they appear complete
+        // This ensures they're fully decoded and ready
+        assetPromises.push(preloadImage(img.src));
     });
 
     // 3) Background images in inline styles (carousel shake-image divs)
@@ -91,6 +106,7 @@ if (loadingScreen) {
 
     // 4) Key images that will be injected by JS later (scroll-blend shakes + floating)
     const criticalImages = [
+        'images/elevated-text-nobg.png?v=1',  // Elevated text image
         'images/oreo-delight-nobg.webp',
         'images/strawberry-dream-nobg.webp',
         'images/milo-magic-nobg.webp',
@@ -141,12 +157,12 @@ if (loadingScreen) {
         }, 300);
     });
 
-    // ── Safety net: dismiss after 15s no matter what ──
+    // ── Safety net: dismiss after 25s no matter what ──
     setTimeout(() => {
         clearInterval(progressInterval);
         setLoaderProgress(100);
         dismissLoader();
-    }, 15000);
+    }, 25000);
 }
 
 // Mobile Menu Toggle
