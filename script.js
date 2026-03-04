@@ -189,62 +189,69 @@ const carouselTrack = document.getElementById('carouselTrack');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
-if (carouselTrack && prevBtn && nextBtn) {
-    let currentIndex = 0;
+if (carouselTrack) {
     const slides = carouselTrack.querySelectorAll('.carousel-slide');
     const totalSlides = slides.length;
-    const slideWidth = slides[0]?.offsetWidth || 280;
-    const gap = 32; // 2rem gap
-    const moveDistance = slideWidth + gap;
+
+    // Detect mobile: buttons are hidden via CSS on ≤768px
+    const isMobile = () => window.innerWidth <= 768;
+
+    // ── Desktop: JS-driven transform carousel ──
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+
+    function getSlideMetrics() {
+        const slide = slides[0];
+        if (!slide) return { slideWidth: 280, gap: 32 };
+        const slideWidth = slide.offsetWidth;
+        const gap = parseInt(getComputedStyle(carouselTrack).gap) || 32;
+        return { slideWidth, gap };
+    }
 
     function updateCarousel() {
-        carouselTrack.style.transform = `translateX(-${currentIndex * moveDistance}px)`;
+        if (isMobile()) {
+            // On mobile, remove transform so CSS scroll-snap works
+            carouselTrack.style.transform = '';
+            return;
+        }
+        const { slideWidth, gap } = getSlideMetrics();
+        carouselTrack.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
     }
 
     function nextSlide() {
+        if (isMobile()) return; // Let CSS handle mobile
         currentIndex = (currentIndex + 1) % totalSlides;
         updateCarousel();
     }
 
     function prevSlide() {
+        if (isMobile()) return;
         currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         updateCarousel();
     }
 
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 
-    // Auto-play carousel
-    setInterval(nextSlide, 5000);
-
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let isDragging = false;
-
-    carouselTrack.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-    });
-
-    carouselTrack.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-    });
-
-    carouselTrack.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        const endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
+    // Auto-play only on desktop
+    function startAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        if (!isMobile()) {
+            autoPlayTimer = setInterval(nextSlide, 5000);
         }
-        isDragging = false;
+    }
+    startAutoPlay();
+
+    // On resize: re-check mobile vs desktop
+    window.addEventListener('resize', () => {
+        updateCarousel();
+        startAutoPlay();
     });
+
+    // Initial state: clear transform on mobile
+    if (isMobile()) {
+        carouselTrack.style.transform = '';
+    }
 }
 
 // Newsletter form submission
@@ -681,12 +688,9 @@ if (scrollBlendContainer && scrollBlendSections) {
         const relativeScroll = scrollY - curtainTop;
 
         if (relativeScroll < 0) {
-            // Before curtain — use first color
+            // Before curtain — still in hero zone
             mainContentCurtain.style.backgroundColor = bgColors[0];
-            if (navbar) {
-                navbar.style.background = hexToRgba(accentColors[0], 0.88);
-                navbar.style.backdropFilter = 'blur(14px)';
-            }
+            // DON'T touch navbar here — the hero scroll handler keeps it transparent
             return;
         }
 

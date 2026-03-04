@@ -284,6 +284,9 @@ body.is-loading {
     text-transform: uppercase;
     line-height: 1;
     text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+    /* Prevent overflow on narrow viewports */
+    max-width: 100vw;
+    overflow: visible;
 }
 
 .hero-title .script-font {
@@ -319,7 +322,11 @@ body.is-loading {
     margin: 0.5rem auto 0;
     object-fit: contain;
     object-position: center;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+    /* mix-blend-mode: screen makes black pixels invisible,
+       so the cherry + "Elevated" text float over the hero
+       without needing true alpha transparency.
+       Works on ALL browsers including iOS Safari. */
+    mix-blend-mode: screen;
 }
 
 /* Fallback text: completely hidden — video replaces it entirely */
@@ -1386,7 +1393,8 @@ section {
     }
 
     .hero-title-main {
-        font-size: 4.5rem;
+        font-size: 3rem;
+        letter-spacing: 0.03em;
     }
 
     .hero-title .script-font {
@@ -1394,11 +1402,11 @@ section {
     }
 
     .elevated-word-video {
-        height: 32rem;
+        height: 24rem;
     }
 
     .elevated-video-wrap.visible {
-        max-height: 35rem;
+        max-height: 26rem;
     }
 
     .hero-subtitle {
@@ -1467,7 +1475,8 @@ section {
     }
 
     .hero-title-main {
-        font-size: 3.5rem;
+        font-size: 2.4rem;
+        letter-spacing: 0.02em;
     }
 
     .hero-title .script-font {
@@ -1475,11 +1484,11 @@ section {
     }
 
     .elevated-word-video {
-        height: 22rem;
+        height: 18rem;
     }
 
     .elevated-video-wrap.visible {
-        max-height: 24rem;
+        max-height: 20rem;
     }
 
     .hero-buttons {
