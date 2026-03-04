@@ -482,6 +482,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Oreo Delight",
             tag: "Popular",
             image: "images/oreo-delight-nobg.webp",
+            rotateVideo: "images/rotating-shakes/oreo-delight-rotate.webm",
             desc: "Classic cookie perfection in every sip. Creamy cookies-and-cream blended with premium vanilla ice cream.",
             bg: "#00205B",      // Oreo brand dark navy blue
             navAccent: "#003087", // Oreo blue accent
@@ -491,6 +492,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Strawberry Dream",
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
+            rotateVideo: "images/rotating-shakes/strawberry-dream-rotate.webm",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
             bg: "#5C0020",      // Deep strawberry crimson
             navAccent: "#9B1040", // Raspberry accent
@@ -500,6 +502,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Milo Magic",
             tag: "Signature",
             image: "images/milo-magic-nobg.webp",
+            rotateVideo: "images/rotating-shakes/milo-magic-rotate.webm",
             desc: "Rich chocolate malt indulgence. Deep malty chocolate meets premium ice cream.",
             bg: "#004D1A",      // Milo brand deep green
             navAccent: "#006E25", // Milo green accent
@@ -509,6 +512,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Jäger Shake",
             tag: "Premium · 18+",
             image: "images/jager-shake-nobg.webp",
+            rotateVideo: "images/rotating-shakes/jager-shake-rotate.webm",
             desc: "Premium alcohol-infused luxury. Jägermeister meets rich chocolate and vanilla.",
             bg: "#2A1000",      // Deep amber/brown — Jäger orange-brown theme
             navAccent: "#7A3500", // Burnt orange-brown Jäger accent
@@ -518,6 +522,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Amarula Bliss",
             tag: "Luxury · 18+",
             image: "images/amarula-bliss-nobg.webp",
+            rotateVideo: "images/rotating-shakes/amarula-bliss-rotate.webm",
             desc: "Creamy liqueur meets milkshake perfection. Smooth, luxurious, and irresistibly indulgent.",
             bg: "#2D3D1A",      // Dark pistachio/sage green — Amarula feel
             navAccent: "#4A6828", // Pistachio accent
@@ -527,6 +532,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Strawberry Kiss",
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
+            rotateVideo: "images/rotating-shakes/strawberry-kiss-rotate.webm",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
             bg: "#4A0020",      // Deep rose — Strawberry Lips brand pink
             navAccent: "#8B1045", // Rose-red accent
@@ -614,7 +620,10 @@ if (scrollBlendContainer && scrollBlendSections) {
             ${floatingHTML}
             <div class="scroll-blend-content">
                 <div class="scroll-blend-visual">
-                    <img src="${shake.image}" alt="${shake.name}" class="scroll-blend-image" />
+                    <img src="${shake.image}" alt="${shake.name}" class="scroll-blend-image" data-shake="${shake.name}" />
+                    <video class="scroll-blend-rotate-video" muted playsinline preload="none" loop>
+                        <source src="${shake.rotateVideo}" type="video/webm">
+                    </video>
                 </div>
                 <div class="scroll-blend-info">
                     <span class="scroll-blend-tag">${shake.tag}</span>
@@ -627,6 +636,101 @@ if (scrollBlendContainer && scrollBlendSections) {
 
         scrollBlendSections.appendChild(section);
     });
+
+    // ── HOVER ROTATING VIDEOS WITH SCROLL SCRUB ──
+    // Wait for DOM to update after sections are created
+    setTimeout(() => {
+        const rotateVideos = document.querySelectorAll('.scroll-blend-rotate-video');
+        const scrollBlendImages = document.querySelectorAll('.scroll-blend-image');
+        
+        rotateVideos.forEach((video, index) => {
+            const img = scrollBlendImages[index];
+            const visual = img ? img.closest('.scroll-blend-visual') : null;
+            
+            if (!visual || !img) return;
+            
+            let isHovering = false;
+            let videoLoaded = false;
+            
+            // Sync video size to match image exactly
+            const syncVideoSize = () => {
+                const imgRect = img.getBoundingClientRect();
+                const imgStyle = window.getComputedStyle(img);
+                video.style.width = imgStyle.width;
+                video.style.maxWidth = imgStyle.maxWidth;
+                video.style.height = imgStyle.height;
+            };
+            
+            // Load video on first hover
+            const loadVideo = () => {
+                if (!videoLoaded) {
+                    video.load();
+                    videoLoaded = true;
+                    // Wait for video metadata, then sync size
+                    video.addEventListener('loadedmetadata', syncVideoSize, { once: true });
+                }
+            };
+            
+            // Hover/touch enter: show video, hide image, start playing
+            const startVideo = () => {
+                isHovering = true;
+                loadVideo();
+                syncVideoSize();
+                video.currentTime = 0;
+                video.play().catch(() => {});
+            };
+            
+            const stopVideo = () => {
+                isHovering = false;
+                video.pause();
+                video.currentTime = 0;
+            };
+            
+            // Desktop hover
+            visual.addEventListener('mouseenter', startVideo);
+            visual.addEventListener('mouseleave', stopVideo);
+            
+            // Mobile touch
+            visual.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startVideo();
+            });
+            
+            visual.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                // Delay stop to allow scrolling
+                setTimeout(() => {
+                    if (!visual.matches(':hover')) {
+                        stopVideo();
+                    }
+                }, 100);
+            });
+            
+            // Scroll scrub: sync video playback with scroll position while hovering
+            const handleScroll = () => {
+                if (!isHovering || !videoLoaded || !video.duration) return;
+                
+                const section = visual.closest('.scroll-blend-section');
+                if (!section) return;
+                
+                const sectionRect = section.getBoundingClientRect();
+                const sectionTop = sectionRect.top + window.pageYOffset;
+                const sectionHeight = sectionRect.height;
+                const scrollY = window.pageYOffset;
+                const relativeScroll = scrollY - sectionTop;
+                
+                // Only scrub when section is in viewport
+                if (sectionRect.top < window.innerHeight && sectionRect.bottom > 0) {
+                    // Map scroll position within section to video timeline (0 to duration)
+                    const scrollProgress = Math.max(0, Math.min(1, relativeScroll / sectionHeight));
+                    video.currentTime = scrollProgress * video.duration;
+                }
+            };
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('resize', syncVideoSize);
+        });
+    }, 100);
 
     // ── Set initial curtain background ──
     if (mainContentCurtain) {

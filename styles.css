@@ -1103,6 +1103,7 @@ section {
     align-items: center;
     justify-content: center;
     position: relative;
+    cursor: pointer;
 }
 
 .scroll-blend-image {
@@ -1114,6 +1115,33 @@ section {
     transform: scale(0);
     opacity: 0;
     background: transparent;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-blend-visual:hover .scroll-blend-image {
+    opacity: 0;
+}
+
+.scroll-blend-rotate-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 580px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    /* Match image positioning exactly */
+    object-position: center;
+}
+
+.scroll-blend-visual:hover .scroll-blend-rotate-video {
+    opacity: 1;
 }
 
 .scroll-blend-section.visible .scroll-blend-image {
@@ -1358,6 +1386,11 @@ section {
     /* Slightly smaller floating elements on mobile */
     .floating-ingredient {
         max-width: 140px !important;
+    }
+    
+    /* Rotating videos on mobile */
+    .scroll-blend-rotate-video {
+        max-width: 320px;
     }
 }
 
