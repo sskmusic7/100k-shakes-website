@@ -306,9 +306,9 @@ body.is-loading {
     transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 0.8s ease,
                 transform 0.8s ease;
-    /* Dark bg matching hero — mix-blend-mode: screen on video
-       makes black video pixels merge into this dark tone = invisible */
-    background: rgba(42, 26, 14, 1);
+    /* Lighter bg so screen blend mode makes black pixels visible
+       Screen blend: black on light = visible, black on dark = invisible */
+    background: rgba(60, 40, 25, 0.6);
 }
 
 .elevated-video-wrap.visible {
