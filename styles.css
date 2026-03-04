@@ -1122,7 +1122,7 @@ section {
     opacity: 0;
 }
 
-.scroll-blend-rotate-video {
+.scroll-blend-video-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1130,17 +1130,26 @@ section {
     width: 100%;
     max-width: 580px;
     height: auto;
-    object-fit: contain;
+    background: rgba(255, 255, 255, 0.95); /* Light background for mix-blend-mode */
+    border-radius: 20px;
+    padding: 20px;
     opacity: 0;
     pointer-events: none;
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
     transition: opacity 0.3s ease;
     z-index: 10;
-    /* Match image positioning exactly */
-    object-position: center;
 }
 
-.scroll-blend-visual:hover .scroll-blend-rotate-video {
+.scroll-blend-rotate-video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+    /* Remove black backgrounds - screen blend mode makes black transparent */
+    mix-blend-mode: screen;
+}
+
+.scroll-blend-visual:hover .scroll-blend-video-wrapper {
     opacity: 1;
 }
 
@@ -1389,8 +1398,12 @@ section {
     }
     
     /* Rotating videos on mobile */
-    .scroll-blend-rotate-video {
+    .scroll-blend-video-wrapper {
         max-width: 320px;
+    }
+    
+    .scroll-blend-rotate-video {
+        width: 100%;
     }
 }
 

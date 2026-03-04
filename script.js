@@ -621,9 +621,11 @@ if (scrollBlendContainer && scrollBlendSections) {
             <div class="scroll-blend-content">
                 <div class="scroll-blend-visual">
                     <img src="${shake.image}" alt="${shake.name}" class="scroll-blend-image" data-shake="${shake.name}" />
-                    <video class="scroll-blend-rotate-video" muted playsinline preload="none" loop>
-                        <source src="${shake.rotateVideo}" type="video/webm">
-                    </video>
+                    <div class="scroll-blend-video-wrapper">
+                        <video class="scroll-blend-rotate-video" muted playsinline preload="none" loop>
+                            <source src="${shake.rotateVideo}" type="video/webm">
+                        </video>
+                    </div>
                 </div>
                 <div class="scroll-blend-info">
                     <span class="scroll-blend-tag">${shake.tag}</span>
