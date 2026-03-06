@@ -645,17 +645,39 @@ section {
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin: 0 auto 3rem auto;
+    max-width: 1400px;
 }
 
 .social-post {
     position: relative;
-    aspect-ratio: 1;
     border-radius: 15px;
     overflow: hidden;
-    cursor: pointer;
+    background: #FFF;
+    /* Contain Instagram embed */
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Override Instagram inline styles to keep embeds contained */
+.social-post blockquote {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+}
+
+.social-post blockquote a {
+    display: block !important;
+    width: 100% !important;
+}
+
+.social-post blockquote div {
+    max-width: 100% !important;
 }
 
 .social-image {
