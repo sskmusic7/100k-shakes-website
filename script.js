@@ -389,41 +389,23 @@ navLinksAll.forEach(link => {
 });
 
 // ════════════════════════════════════════════════
-//  HERO VIDEO SCROLL-SCRUB + TITLE FADE-OUT
+//  HERO VIDEO AUTOPLAY + TITLE FADE-OUT
 // ════════════════════════════════════════════════
 
 const heroVideo = document.getElementById('heroVideo');
 const heroTitleOverlay = document.getElementById('heroTitleOverlay');
-const elevatedImage = document.getElementById('elevatedImage');
-const heroTitleMain = document.querySelector('.hero-title-main');
 
 if (heroVideo) {
-    // Wait for video metadata to load so we know the duration
-    heroVideo.addEventListener('loadedmetadata', () => {
-        heroVideo.currentTime = 0;
-    });
-    // Force load
-    heroVideo.load();
+    // Video now autoplays and loops - no JS control needed for playback
+    // Just handle the fade-out effect on scroll
 
-    // Scroll-scrub: map scroll position to video timeline
     const heroScrollSpacer = document.querySelector('.hero-scroll-spacer');
 
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
         const spacerHeight = heroScrollSpacer ? heroScrollSpacer.offsetHeight : window.innerHeight * 2;
 
-        // Map scroll to video time — START AT 50% (halfway through video)
-        // Scroll 0 → spacerHeight maps to video 50% → 100%
-        if (heroVideo.duration && isFinite(heroVideo.duration)) {
-            const maxScroll = spacerHeight;
-            const scrollFraction = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-            // Start at 50% of video, end at 100%
-            const videoStartTime = heroVideo.duration * 0.5;
-            const videoEndTime = heroVideo.duration;
-            heroVideo.currentTime = videoStartTime + (scrollFraction * (videoEndTime - videoStartTime));
-        }
-
-        // ── Hero title + Elevated image fade out at the very end of spacer (last 15%) ──
+        // ── Hero title fades out at the very end of spacer (last 15%) ──
         if (heroTitleOverlay) {
             const fadeStart = spacerHeight * 0.85;
             const fadeEnd = spacerHeight;

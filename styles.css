@@ -645,10 +645,10 @@ section {
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin: 0 auto 3rem auto;
-    max-width: 1400px;
+    max-width: 1200px;
 }
 
 .social-post {
@@ -656,28 +656,43 @@ section {
     border-radius: 15px;
     overflow: hidden;
     background: #FFF;
-    /* Contain Instagram embed */
+    /* Fixed height to contain Instagram embed */
     width: 100%;
     max-width: 100%;
+    height: 400px;
 }
 
-/* Override Instagram inline styles to keep embeds contained */
+/* Force Instagram embeds to stay contained */
+.social-post {
+    contain: strict;
+    isolation: isolate;
+}
+
 .social-post blockquote {
     width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
+    height: 100% !important;
+    min-width: unset !important;
+    max-width: unset !important;
     margin: 0 !important;
+    padding: 0 !important;
     border-radius: 15px !important;
     overflow: hidden !important;
+    position: relative !important;
 }
 
-.social-post blockquote a {
+/* Hide all Instagram content except the actual post */
+.social-post blockquote > div {
+    display: none !important;
+}
+
+/* Show only the iframe/video that Instagram loads */
+.social-post blockquote iframe,
+.social-post blockquote video,
+.social-post blockquote img {
     display: block !important;
     width: 100% !important;
-}
-
-.social-post blockquote div {
-    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
 }
 
 .social-image {
