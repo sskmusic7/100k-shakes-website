@@ -519,6 +519,16 @@ if (scrollBlendContainer && scrollBlendSections) {
             bg: "#4A0020",      // Deep rose — Strawberry Lips brand pink
             navAccent: "#8B1045", // Rose-red accent
             category: "ShotShake"
+        },
+        {
+            name: "Baileys Berry",
+            tag: "Classic · 18+",
+            image: "images/baileys-berry.jpg",
+            rotateVideo: "images/rotating-shakes/baileys-berry-rotate.webm",
+            desc: "Classic Irish cream liqueur with fresh strawberry swirl. A timeless combination with a fruity twist.",
+            bg: "#8B1045",      // Creamy pink - Berry theme
+            navAccent: "#C01460", // Bright pink accent
+            category: "ShotShake"
         }
     ];
 
@@ -575,6 +585,11 @@ if (scrollBlendContainer && scrollBlendSections) {
             { src: "images/floating/strawberry-kiss-float-1.webp", top: "50%", left: "3%", width: "280px" },
             { src: "images/floating/strawberry-kiss-float-2.webp", top: "10%", left: "30%", width: "260px" },
             { src: "images/floating/strawberry-kiss-float-3.webp", top: "15%", right: "2%", width: "300px" }
+        ],
+        "Baileys Berry": [
+            { src: "images/floating/strawberry-kiss-float-1.webp", top: "20%", left: "5%", width: "250px" },
+            { src: "images/floating/strawberry-dream-float-2.webp", top: "45%", left: "35%", width: "270px" },
+            { src: "images/floating/strawberry-kiss-float-3.webp", top: "60%", right: "5%", width: "260px" }
         ]
     };
 
