@@ -524,7 +524,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Baileys Berry",
             tag: "Classic · 18+",
             image: "images/baileys-berry.png",
-            rotateVideo: "images/rotating-shakes/baileys-berry-rotate.webm",
+            rotateVideo: "images/rotating-shakes/baileys-berry-rotate-green.webm",
             desc: "Classic Irish cream liqueur with fresh strawberry swirl. A timeless combination with a fruity twist.",
             bg: "#8B1045",      // Creamy pink - Berry theme
             navAccent: "#C01460", // Bright pink accent
@@ -587,9 +587,9 @@ if (scrollBlendContainer && scrollBlendSections) {
             { src: "images/floating/strawberry-kiss-float-3.webp", top: "15%", right: "2%", width: "300px" }
         ],
         "Baileys Berry": [
-            { src: "images/floating/strawberry-kiss-float-1.webp", top: "20%", left: "5%", width: "250px" },
-            { src: "images/floating/strawberry-dream-float-2.webp", top: "45%", left: "35%", width: "270px" },
-            { src: "images/floating/strawberry-kiss-float-3.webp", top: "60%", right: "5%", width: "260px" }
+            { src: "images/floating/baileys-berry-float-1.png", top: "20%", left: "5%", width: "250px" },
+            { src: "images/floating/baileys-berry-float-2.png", top: "45%", left: "35%", width: "270px" },
+            { src: "images/floating/baileys-berry-float-3.png", top: "60%", right: "5%", width: "260px" }
         ]
     };
 
