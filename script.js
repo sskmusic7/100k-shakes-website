@@ -523,7 +523,7 @@ if (scrollBlendContainer && scrollBlendSections) {
         {
             name: "Baileys Berry",
             tag: "Classic · 18+",
-            image: "images/baileys-berry.jpg",
+            image: "images/baileys-berry.png",
             rotateVideo: "images/rotating-shakes/baileys-berry-rotate.webm",
             desc: "Classic Irish cream liqueur with fresh strawberry swirl. A timeless combination with a fruity twist.",
             bg: "#8B1045",      // Creamy pink - Berry theme
