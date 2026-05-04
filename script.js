@@ -643,19 +643,82 @@ if (scrollBlendContainer && scrollBlendSections) {
         rotateVideos.forEach((video, index) => {
             const img = scrollBlendImages[index];
             const visual = img ? img.closest('.scroll-blend-visual') : null;
-            
+
             if (!visual || !img) return;
-            
+
             let isHovering = false;
             let videoLoaded = false;
-            
+
+            // Check if this is Baileys Berry video (needs chroma key)
+            const isBaileysBerry = video.src.includes('baileys-berry-rotate-black');
+            let canvas, ctx, animationFrame;
+
+            // Setup canvas for chroma keying (only for Baileys Berry)
+            if (isBaileysBerry) {
+                canvas = document.createElement('canvas');
+                ctx = canvas.getContext('2d', { willReadFrequently: true });
+                canvas.style.cssText = video.style.cssText;
+                canvas.style.position = 'absolute';
+                canvas.style.top = '50%';
+                canvas.style.left = '50%';
+                canvas.style.transform = 'translate(-50%, -50%)';
+                canvas.style.width = '100%';
+                canvas.style.maxWidth = '580px';
+                canvas.style.height = 'auto';
+                canvas.style.objectFit = 'contain';
+                canvas.style.opacity = '0';
+                canvas.style.pointerEvents = 'none';
+                canvas.style.transition = 'opacity 0.3s ease';
+                canvas.style.zIndex = '10';
+                canvas.style.filter = 'drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6))';
+                visual.appendChild(canvas);
+                video.style.opacity = '0';
+            }
+
+            // Chroma key function to remove black background
+            const applyChromaKey = () => {
+                if (!canvas || !ctx) return;
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+
+                // Remove black background (threshold-based)
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+
+                    // If pixel is black (all channels below threshold), make it transparent
+                    if (r < 30 && g < 30 && b < 30) {
+                        data[i + 3] = 0; // Set alpha to 0 (transparent)
+                    }
+                }
+
+                ctx.putImageData(imageData, 0, 0);
+
+                // Continue animation if video is playing
+                if (isHovering && !video.paused && !video.ended) {
+                    animationFrame = requestAnimationFrame(applyChromaKey);
+                }
+            };
+
             // Sync video size to match image exactly
             const syncVideoSize = () => {
                 const imgRect = img.getBoundingClientRect();
                 const imgStyle = window.getComputedStyle(img);
-                video.style.width = imgStyle.width;
-                video.style.maxWidth = imgStyle.maxWidth;
-                video.style.height = imgStyle.height;
+                if (canvas) {
+                    canvas.style.width = imgStyle.width;
+                    canvas.style.maxWidth = imgStyle.maxWidth;
+                    canvas.style.height = imgStyle.height;
+                } else {
+                    video.style.width = imgStyle.width;
+                    video.style.maxWidth = imgStyle.maxWidth;
+                    video.style.height = imgStyle.height;
+                }
             };
             
             // Load video on first hover
@@ -675,12 +738,26 @@ if (scrollBlendContainer && scrollBlendSections) {
                 syncVideoSize();
                 video.currentTime = 0;
                 video.play().catch(() => {});
+
+                // Start chroma key animation for Baileys Berry
+                if (isBaileysBerry && canvas) {
+                    canvas.style.opacity = '1';
+                    applyChromaKey();
+                }
             };
-            
+
             const stopVideo = () => {
                 isHovering = false;
                 video.pause();
                 video.currentTime = 0;
+
+                // Stop chroma key animation for Baileys Berry
+                if (isBaileysBerry && canvas) {
+                    canvas.style.opacity = '0';
+                    if (animationFrame) {
+                        cancelAnimationFrame(animationFrame);
+                    }
+                }
             };
             
             // Desktop hover
