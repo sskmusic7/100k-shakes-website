@@ -649,12 +649,13 @@ if (scrollBlendContainer && scrollBlendSections) {
             let isHovering = false;
             let videoLoaded = false;
 
-            // Check if this is Baileys Berry video (needs chroma key)
-            const isBaileysBerry = video.src.includes('baileys-berry-rotate-black');
+            // Check if this video needs chroma key (black background removal)
+            const needsChromaKey = video.src.includes('baileys-berry-rotate-black') ||
+                                    video.src.includes('strawberry-dream-rotate');
             let canvas, ctx, animationFrame;
 
-            // Setup canvas for chroma keying (only for Baileys Berry)
-            if (isBaileysBerry) {
+            // Setup canvas for chroma keying (only for videos that need it)
+            if (needsChromaKey) {
                 canvas = document.createElement('canvas');
                 ctx = canvas.getContext('2d', { willReadFrequently: true });
                 canvas.style.cssText = video.style.cssText;
@@ -739,8 +740,8 @@ if (scrollBlendContainer && scrollBlendSections) {
                 video.currentTime = 0;
                 video.play().catch(() => {});
 
-                // Start chroma key animation for Baileys Berry
-                if (isBaileysBerry && canvas) {
+                // Start chroma key animation for videos that need it
+                if (needsChromaKey && canvas) {
                     canvas.style.opacity = '1';
                     applyChromaKey();
                 }
@@ -751,8 +752,8 @@ if (scrollBlendContainer && scrollBlendSections) {
                 video.pause();
                 video.currentTime = 0;
 
-                // Stop chroma key animation for Baileys Berry
-                if (isBaileysBerry && canvas) {
+                // Stop chroma key animation for videos that need it
+                if (needsChromaKey && canvas) {
                     canvas.style.opacity = '0';
                     if (animationFrame) {
                         cancelAnimationFrame(animationFrame);
