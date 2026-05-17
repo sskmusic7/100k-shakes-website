@@ -86,7 +86,7 @@ body.is-loading {
     width: 300px;
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+    border-radius: 0;
     overflow: hidden;
     margin: 0 auto 1rem;
 }
@@ -96,7 +96,7 @@ body.is-loading {
     background: linear-gradient(90deg, var(--light-red), var(--strawberry-red));
     width: 0%;
     transition: width 0.3s ease;
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .loading-percent {
@@ -407,7 +407,7 @@ body.is-loading {
 .btn {
     padding: 1rem 2.5rem;
     border: none;
-    border-radius: 50px;
+    border-radius: 0;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -495,7 +495,7 @@ section {
 
 .shake-card {
     background: white;
-    border-radius: 20px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -531,7 +531,7 @@ section {
     padding: 0.3rem 1rem;
     background: var(--primary-brown);
     color: var(--off-white);
-    border-radius: 20px;
+    border-radius: 0;
     font-size: 0.85rem;
     margin-bottom: 1rem;
 }
@@ -549,7 +549,7 @@ section {
     border: none;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 0;
     font-size: 2rem;
     cursor: pointer;
     z-index: 10;
@@ -587,7 +587,7 @@ section {
 .category-card {
     background: var(--cream);
     padding: 2.5rem 2rem;
-    border-radius: 20px;
+    border-radius: 0;
     text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
@@ -600,7 +600,12 @@ section {
 }
 
 .category-icon {
-    font-size: 4rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--primary-brown);
+    padding: 1rem 2rem;
+    background: var(--off-white);
     margin-bottom: 1rem;
 }
 
@@ -653,7 +658,7 @@ section {
 
 .social-post {
     position: relative;
-    border-radius: 15px;
+    border-radius: 0;
     overflow: hidden;
     background: #FFF;
     width: 100%;
@@ -765,7 +770,7 @@ section {
     min-width: 250px;
     padding: 1rem 1.5rem;
     border: 2px solid var(--primary-brown);
-    border-radius: 50px;
+    border-radius: 0;
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
 }
@@ -914,7 +919,7 @@ section {
     background: var(--cream);
     box-shadow: 0 -60px 100px rgba(0, 0, 0, 0.8);
     min-height: 100vh;
-    border-radius: 24px 24px 0 0;
+    border-radius: 0;
 }
 
 .content-section {
@@ -938,7 +943,7 @@ section {
     padding: 0.7rem 1.5rem;
     background: white;
     border: 2px solid var(--primary-brown);
-    border-radius: 25px;
+    border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
@@ -959,7 +964,7 @@ section {
 
 .menu-item {
     background: white;
-    border-radius: 15px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -1001,7 +1006,7 @@ section {
 .tag {
     padding: 0.3rem 0.8rem;
     background: var(--cream);
-    border-radius: 15px;
+    border-radius: 0;
     font-size: 0.75rem;
     color: var(--primary-brown);
 }
@@ -1052,7 +1057,7 @@ section {
     text-align: center;
     padding: 2rem;
     background: white;
-    border-radius: 15px;
+    border-radius: 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -1088,7 +1093,7 @@ section {
     width: 100%;
     padding: 1rem;
     border: 2px solid var(--primary-brown);
-    border-radius: 10px;
+    border-radius: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
 }
@@ -1184,7 +1189,7 @@ section {
     pointer-events: none;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6)); /* Match image filter */
     transition: opacity 0.3s ease;
-    z-index: 10;
+    z-index: 100;
     /* No mix-blend-mode - chroma key handles transparency */
 }
 
@@ -1265,7 +1270,7 @@ section {
     padding: 1rem 2.5rem;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50px;
+    border-radius: 0;
     color: var(--off-white);
     text-decoration: none;
     font-weight: 600;

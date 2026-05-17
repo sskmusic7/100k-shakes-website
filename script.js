@@ -474,7 +474,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Strawberry Dream",
             tag: "Fresh",
             image: "images/strawberry-dream-nobg.webp",
-            rotateVideo: "images/rotating-shakes/strawberry-dream-rotate.webm",
+            rotateVideo: "images/rotating-shakes/strawberry-kiss-rotate.webm",
             desc: "Fresh strawberries blended to perfection. Vibrant pink milkshake with real fruit flavor.",
             bg: "#5C0020",      // Deep strawberry crimson
             navAccent: "#9B1040", // Raspberry accent
@@ -514,7 +514,7 @@ if (scrollBlendContainer && scrollBlendSections) {
             name: "Strawberry Kiss",
             tag: "Sweet · 18+",
             image: "images/strawberry-kiss-nobg.webp",
-            rotateVideo: "images/rotating-shakes/strawberry-kiss-rotate.webm",
+            rotateVideo: "images/rotating-shakes/strawberry-dream-rotate.webm",
             desc: "Strawberry liqueur infused shake with white chocolate sprinkles. Sweet, fruity, and irresistibly indulgent.",
             bg: "#4A0020",      // Deep rose — Strawberry Lips brand pink
             navAccent: "#8B1045", // Rose-red accent
@@ -670,7 +670,7 @@ if (scrollBlendContainer && scrollBlendSections) {
                 canvas.style.opacity = '0';
                 canvas.style.pointerEvents = 'none';
                 canvas.style.transition = 'opacity 0.3s ease';
-                canvas.style.zIndex = '10';
+                canvas.style.zIndex = '100';
                 canvas.style.filter = 'drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6))';
                 visual.appendChild(canvas);
                 video.style.opacity = '0';
@@ -740,10 +740,15 @@ if (scrollBlendContainer && scrollBlendSections) {
                 video.currentTime = 0;
                 video.play().catch(() => {});
 
-                // Start chroma key animation for videos that need it
+                // Hide the static image
+                img.style.opacity = '0';
+
+                // Show video or canvas
                 if (needsChromaKey && canvas) {
                     canvas.style.opacity = '1';
                     applyChromaKey();
+                } else {
+                    video.style.opacity = '1';
                 }
             };
 
@@ -752,12 +757,17 @@ if (scrollBlendContainer && scrollBlendSections) {
                 video.pause();
                 video.currentTime = 0;
 
+                // Show the static image again
+                img.style.opacity = '1';
+
                 // Stop chroma key animation for videos that need it
                 if (needsChromaKey && canvas) {
                     canvas.style.opacity = '0';
                     if (animationFrame) {
                         cancelAnimationFrame(animationFrame);
                     }
+                } else {
+                    video.style.opacity = '0';
                 }
             };
             
